@@ -1,0 +1,1644 @@
+############################################################
+# Consolidated Data File generated from 12 sources in 'rdip'.
+############################################################
+
+
+
+# --- START FILE: 1606_07993v1.json (Path: rdip/1606_07993v1.json) ---
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/BioIE-Review-Learning-Methods",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Comprehensive Review of Machine Learning and Deep Learning Methods for Biomedical Information Extraction (BioIE)"
+    },
+
+    {
+      "@id": "rdip:Activity/Literature-Review-and-Synthesis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Systematic narrative review and taxonomic synthesis of >200 publications on learning-based BioIE methods (circa 2010–2017)",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/BioIE-Methods-Taxonomy",
+        "@type": "schema:Dataset",
+        "schema:name": "Taxonomy and narrative synthesis of BioIE learning paradigms (supervised, semi-supervised, unsupervised, hybrid, OpenIE, deep learning)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Feature-Based-Learning-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of feature engineering and feature selection approaches in supervised BioIE (lexical, syntactic, semantic, dependency, discourse, word embeddings)",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Feature-Based-BioIE-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Summary of feature types and feature selection strategies in BioIE"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Kernel-Based-Learning-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of kernel methods (tree kernels, graph kernels, MKL, hybrid kernels) applied to BioIE tasks",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Kernel-Based-BioIE-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Synthesis of kernel-based systems and multiple kernel learning in biomedical NER, PPI, DDI, and event extraction"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Cost-Effective-Annotation-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of annotation efficiency methods: pre-annotation, active learning, crowdsourcing (including CrowdTruth), and semi-automated tools (e.g., RapTAT)",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Annotation-Efficiency-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Overview of cost-reduction strategies for creating biomedical annotated corpora"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Unlabeled-Data-Learning-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of unsupervised, semi-supervised (self-training, transfer learning, manifold regularization), and distant supervision approaches in BioIE",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Unlabeled-Learning-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Synthesis of methods leveraging unlabeled biomedical text (including DeepDive distant supervision applications)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Hybrid-and-Joint-Modeling-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of hybrid (rule + ML ensemble) and joint modeling approaches (MLN, dual decomposition, SEARN, structured perceptron) for BioIE",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Hybrid-Joint-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Summary of pipeline vs. joint inference strategies in biomedical event extraction and relation extraction"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/OpenIE-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of Open Information Extraction paradigms and their emerging application to biomedical text",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/OpenIE-BioIE-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Comparison of Light vs. Heavy OpenIE extractors and biomedical adaptations (NELL adaptation, relation clustering)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Deep-Learning-BioIE-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of deep learning applications in BioIE: word embeddings, CNNs, RNNs/LSTMs/GRUs, denoising autoencoders, transfer learning from vision, and clinical prediction",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:usedSoftware": [
+        {
+          "@id": "rdip:Software/word2vec",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "word2vec / GloVe-style embeddings",
+          "rdip:version": "various"
+        },
+        {
+          "@id": "rdip:Software/Theano-TensorFlow-CNTK",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "Deep learning frameworks (Theano, TensorFlow, CNTK, etc.) – implied but not named",
+          "rdip:version": "various (2014–2017 era)"
+        }
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Deep-Learning-BioIE-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "State-of-the-art summary of deep neural architectures applied to biomedical NER, relation/event extraction, clinical prediction, and medical imaging"
+      }
+    },
+
+    {
+      "@id": "rdip:Dataset/BioIE-Literature-Corpus",
+      "@type": "schema:Dataset",
+      "schema:name": "Corpus of >200 cited publications on machine learning for BioIE (primarily 2010–2017)",
+      "schema:description": "Includes references to CRF, SSVM, kernel methods, OpenIE systems, DeepDive, word2vec-era embeddings, early CNN/RNN papers in biomedicine"
+    },
+
+    {
+      "@id": "rdip:Activity/Final-Synthesis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Integration of all sub-reviews into final review manuscript section",
+      "prov:used": [
+        "rdip:Dataset/Feature-Based-BioIE-Summary",
+        "rdip:Dataset/Kernel-Based-BioIE-Summary",
+        "rdip:Dataset/Annotation-Efficiency-Summary",
+        "rdip:Dataset/Unlabeled-Learning-Summary",
+        "rdip:Dataset/Hybrid-Joint-Summary",
+        "rdip:Dataset/OpenIE-BioIE-Summary",
+        "rdip:Dataset/Deep-Learning-BioIE-Summary"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/BioIE-Review-Section",
+        "@type": "schema:Dataset",
+        "schema:name": "Final 'Methodology' review section of the paper"
+      }
+    }
+  ]
+}
+# --- END FILE: 1606_07993v1.json ---
+
+
+# --- START FILE: 1908_07836v1.json (Path: rdip/1908_07836v1.json) ---
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/PubLayNet",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "PubLayNet: Large-Scale Automatic Annotation of Document Layout in PubMed Central Open Access Subset (Xu et al., 2020)"
+    },
+
+    {
+      "@id": "rdip:Dataset/PMCOA-XML-PDF-2018",
+      "@type": "schema:Dataset",
+      "schema:name": "PubMed Central Open Access Subset (downloaded 2018-10-03)",
+      "schema:size": "1,162,856 articles with complete XML + PDF",
+      "schema:description": "Articles provided under Creative Commons, containing both PDF and NLM-JATS XML representations"
+    },
+
+    {
+      "@id": "rdip:Activity/XML-Preprocessing",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "XML cleaning and standardization (remove math/formula nodes, move list/table/figure to floats-group)",
+      "prov:used": "rdip:Dataset/PMCOA-XML-PDF-2018",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PMCOA-XML-Cleaned",
+        "@type": "schema:Dataset",
+        "schema:name": "Standardized NLM-JATS XML trees"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/PDF-Parsing",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "PDF parsing with PDFMiner to extract textboxes, textlines, images, geometric shapes",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/PDFMiner",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "PDFMiner",
+        "rdip:version": "2018-era"
+      },
+      "prov:used": "rdip:Dataset/PMCOA-XML-PDF-2018",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PMCOA-PDF-Layout-Elements",
+        "@type": "schema:Dataset",
+        "schema:name": "Raw PDF layout primitives (textboxes, images, shapes) with bounding boxes"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/String-Normalization",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Unicode KD normalization of all strings from XML and PDF",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Normalized-Strings",
+        "@type": "schema:Dataset"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/PDF-XML-Matching",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Fuzzy string matching (Levenshtein via fuzzysearch) + adaptive distance threshold + sequential textline matching",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/fuzzysearch",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "fuzzysearch Python package"
+      },
+      "prov:used": [
+        "rdip:Dataset/PMCOA-XML-Cleaned",
+        "rdip:Dataset/PMCOA-PDF-Layout-Elements",
+        "rdip:Dataset/Normalized-Strings"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Matched-Layout-Elements",
+        "@type": "schema:Dataset",
+        "schema:name": "PDF elements matched to XML nodes with preliminary category labels"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Figure-Table-Body-Annotation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Margin-based annotation of figure/table bodies using main-text box and caption position",
+      "prov:used": "rdip:Dataset/Matched-Layout-Elements",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Figure-Table-Bodies",
+        "@type": "schema:Dataset"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Segmentation-Generation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Polygon segmentation generation from textlines (horizontal/vertical edges only) + reuse bbox for figures/tables",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PubLayNet-Segmentations",
+        "@type": "schema:Dataset"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Quality-Control-Filtering",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Annotation quality filtering (>99% coverage for non-title pages, >90% for title pages) + manual curation of dev/test",
+      "prov:used": [
+        "rdip:Dataset/Matched-Layout-Elements",
+        "rdip:Dataset/Figure-Table-Bodies",
+        "rdip:Dataset/PubLayNet-Segmentations"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PubLayNet-Final",
+        "@type": "schema:Dataset",
+        "schema:name": "PubLayNet dataset",
+        "schema:size": "Training: 340,391 pages; Dev: 11,858 pages; Test: 11,983 pages (5 categories: Text, Title, List, Table, Figure)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Train-Dev-Test-Split",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Journal-level stratified split + balanced sampling per category + manual curation of dev/test",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PubLayNet-Partitions",
+        "@type": "schema:Dataset",
+        "schema:name": "Official PubLayNet train/val/test splits (Table II)"
+      }
+    }
+  ]
+}
+# --- END FILE: 1908_07836v1.json ---
+
+
+# --- START FILE: 2006_07116v1.json (Path: rdip/2006_07116v1.json) ---
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/RNN-NAS-Benchmark",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Large-Scale Benchmark for Neural Architecture Search in Recurrent Language Modeling (2021)"
+    },
+
+    {
+      "@id": "rdip:Dataset/PTB",
+      "@type": "schema:Dataset",
+      "schema:name": "Penn Tree Bank (PTB)",
+      "schema:size": "1.086M tokens, vocab 10k"
+    },
+    {
+      "@id": "rdip:Dataset/WikiText-2",
+      "@type": "schema:Dataset",
+      "schema:name": "WikiText-2",
+      "schema:size": "2.552M tokens, vocab 33,278"
+    },
+
+    {
+      "@id": "rdip:Activity/Search-Space-Generation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Procedural generation of 14,322 attributed recurrent cell graphs (≤24 nodes, ≤3 hidden states, operations: Linear/Blending/Activations)",
+      "schema:description": "Random graph generation with constraints + manual addition of RNN/LSTM/GRU baselines",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/RNN-Cell-Search-Space",
+        "@type": "schema:Dataset",
+        "schema:size": "14,322 unique recurrent cell architectures (macro: AWD-LSTM)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Hyperparameter-Tuning",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Hyperparameter search on AWD-LSTM for hidden size, batch size, and dropout configurations",
+      "prov:used": "rdip:Dataset/PTB",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Fixed-Training-Config",
+        "@type": "schema:Dataset",
+        "schema:description": "nhid=600, batch_size=20, dropout=0.1, dropouth=0.25, dropouti=0.4, dropoute=0.0, wdrop=0.1"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Model-Training-PTB",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Training of 14,322 RNN architectures on PTB (4114 ×3 seeds, rest ×1)",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/PyTorch-AWD-LSTM",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "AWD-LSTM PyTorch implementation",
+        "rdip:version": "Merity et al. repository"
+      },
+      "prov:used": [
+        "rdip:Dataset/PTB",
+        "rdip:Dataset/RNN-Cell-Search-Space",
+        "rdip:Dataset/Fixed-Training-Config"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PTB-Training-Logs",
+        "@type": "schema:Dataset",
+        "schema:description": "Per-epoch train/val/test log-perplexity, wall time, final parameters for 14,322 models"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Stratified-Training-WikiText2",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Training of 289 stratified models on WikiText-2 based on PTB performance",
+      "prov:used": [
+        "rdip:Dataset/WikiText-2",
+        "rdip:Dataset/PTB-Training-Logs"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/WikiText2-Training-Logs",
+        "@type": "schema:Dataset"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Graph-Embedding",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Architecture embedding via graph2vec (10D and 50D)",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/graph2vec",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "graph2vec"
+      },
+      "prov:used": "rdip:Dataset/RNN-Cell-Search-Space",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Architecture-Embeddings",
+        "@type": "schema:Dataset",
+        "schema:size": "14,322 × (10D + 50D)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Benchmark-Environment",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Creation of NAS simulation environment with precomputed training trajectories",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/RNN-NAS-Benchmark",
+        "@type": "schema:Dataset",
+        "schema:name": "Public RNN NAS benchmark with 14,322 pre-trained models, logs, and evaluation API"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/NAS-Algorithm-Evaluation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Benchmarking of Random Search, Hyperband, BO (graph2vec), RE, TPE, SMAC (30 trials each)",
+      "prov:used": "rdip:Dataset/RNN-NAS-Benchmark",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/NAS-Algorithm-Results",
+        "@type": "schema:Dataset",
+        "schema:name": "Regret vs. wall-time curves (Figure 10)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Word-Embedding-Evaluation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Intrinsic evaluation on WordSim-353 and SimLex-999 + extrinsic on GLUE (stratified sample)",
+      "prov:used": "rdip:Dataset/PTB-Training-Logs",
+      "prov:used": "rdip:Dataset/WikiText2-Training-Logs",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Embedding-Eval-Results",
+        "@type": "schema:Dataset",
+        "schema:name": "Figures 9 + GLUE scores"
+      }
+    }
+  ]
+}
+# --- END FILE: 2006_07116v1.json ---
+
+
+# --- START FILE: 2102_05918v2.json (Path: rdip/2102_05918v2.json) ---
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/ALIGN",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "ALIGN: Scaling Up Visual and Vision-Language Representation Learning With Noisy Text Supervision (Jia et al., 2021)"
+    },
+
+    {
+      "@id": "rdip:Activity/Web-AltText-Crawling",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Web-scale crawling of raw English alt-text image-text pairs (following Conceptual Captions pipeline)"
+    },
+
+    {
+      "@id": "rdip:Activity/Minimal-Cleaning-Filtering",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Minimal cleaning of raw alt-text data (image-based + text-based frequency filtering only)",
+      "schema:description": "Image filters: remove porn, shorter side >200px, aspect<3, >1000 alt-texts; remove near-duplicates of downstream test sets. Text filters: shared by ≤10 images, vocab ≤100M most frequent tokens, 3≤unigrams≤20",
+      "prov:used": "rdip:Dataset/Raw-Web-AltText",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ALIGN-1.8B",
+        "@type": "schema:Dataset",
+        "schema:name": "ALIGN pre-training dataset",
+        "schema:size": "1.8 billion noisy image-text pairs"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/ALIGN-Pretraining-English",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Pre-training of ALIGN dual-encoder (EfficientNet-L2 + BERT-Large) on 1.8B noisy English image-text pairs",
+      "rdip:usedSoftware": [
+        {
+          "@id": "rdip:Software/EfficientNet",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "EfficientNet (open-source implementation)",
+          "rdip:version": "Tan & Le, 2019"
+        },
+        {
+          "@id": "rdip:Software/BERT",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "BERT",
+          "rdip:version": "Devlin et al., 2019"
+        },
+        {
+          "@id": "rdip:Software/JAX-TPU",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "JAX + Cloud TPU v3",
+          "rdip:version": "2020-2021"
+        }
+      ],
+      "schema:description": "Normalized softmax (in-batch negatives), LAMB optimizer, 16,384 batch size, 1.2M steps, learnable temperature, trained from scratch",
+      "prov:used": "rdip:Dataset/ALIGN-1.8B",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ALIGN-English-Model",
+        "@type": "schema:Dataset",
+        "schema:name": "Pre-trained ALIGN model (EfficientNet-L2 image + BERT-Large text encoders)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Multilingual-Extension",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Construction of 1.8B multilingual (100+ languages) image-text dataset + training of ALIGNmling",
+      "prov:used": "rdip:Activity/Web-AltText-Crawling",
+      "prov:used": "rdip:Activity/Minimal-Cleaning-Filtering",
+      "rdip:outputDataset": [
+        {
+          "@id": "rdip:Dataset/ALIGN-Multilingual-1.8B",
+          "@type": "schema:Dataset",
+          "schema:name": "Multilingual ALIGN training data (1.8B pairs, 100+ languages)"
+        },
+        {
+          "@id": "rdip:Dataset/ALIGN-Multilingual-Model",
+          "@type": "schema:Dataset",
+          "schema:name": "ALIGNmling model (250k multilingual wordpiece vocabulary)"
+        }
+      ]
+    },
+
+    {
+      "@id": "rdip:Activity/ZeroShot-Transfer",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Zero-shot evaluation on image-text retrieval (Flickr30K, MSCOCO, CxC) and image classification (ImageNet + variants)",
+      "prov:used": "rdip:Dataset/ALIGN-English-Model",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ZeroShot-Results",
+        "@type": "schema:Dataset",
+        "schema:name": "Zero-shot R@1/5/10 on retrieval + top-1 accuracy on ImageNet/ImageNet-R/A/V2"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/FineTuning-Retrieval",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Fine-tuning of ALIGN on Flickr30K and MSCOCO training sets",
+      "prov:used": "rdip:Dataset/ALIGN-English-Model",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ALIGN-FineTuned-Retrieval",
+        "@type": "schema:Dataset",
+        "schema:name": "Fine-tuned ALIGN models for Flickr30K and MSCOCO"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/FineTuning-Classification",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Linear probe and full fine-tuning of ALIGN image encoder on ImageNet, VTAB, and fine-grained classification datasets",
+      "prov:used": "rdip:Dataset/ALIGN-English-Model",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ALIGN-Image-Classification-Models",
+        "@type": "schema:Dataset",
+        "schema:name": "Fine-tuned image classifiers (frozen features + full fine-tune) on ImageNet, VTAB (19 tasks), Flowers-102, Pets, Cars, Food101"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Ablation-Experiments",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Ablation studies on model size, embedding dim, temperature, in-batch negatives, and dataset scale/noise trade-off",
+      "prov:used": "rdip:Dataset/ALIGN-1.8B",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ALIGN-Ablation-Results",
+        "@type": "schema:Dataset",
+        "schema:name": "Tables 8–10 + Figure 3 results"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Qualitative-Analysis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Qualitative retrieval demos and compositionality analysis (image±text queries)",
+      "prov:used": "rdip:Dataset/ALIGN-English-Model",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ALIGN-Qualitative-Figures",
+        "@type": "schema:Dataset",
+        "schema:name": "Figures 4–5 (retrieval with complex text, image+text arithmetic)"
+      }
+    }
+  ]
+}
+# --- END FILE: 2102_05918v2.json ---
+
+
+# --- START FILE: 2306_02177v1.json (Path: rdip/2306_02177v1.json) ---
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/GPT3-SocialScience-Coding",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Towards Coding Social Science Datasets with Language Models (Rytting et al.)"
+    },
+
+    {
+      "@id": "rdip:Dataset/PigeonholingPartisans",
+      "@type": "schema:Dataset",
+      "schema:name": "Pigeonholing Partisans (PP) – 7,675 open-ended descriptions of Democrats/Republicans (Rothschild et al. 2019 + synthetic)",
+      "schema:size": 7675
+    },
+    {
+      "@id": "rdip:Dataset/CongressionalHearings-CAP",
+      "@type": "schema:Dataset",
+      "schema:name": "CAP-coded U.S. Congressional hearing summaries (1946–2010)",
+      "schema:size": ">10,000 summaries (subset n=326 used for intercoder comparison)"
+    },
+    {
+      "@id": "rdip:Dataset/NYT-FrontPage-CAP",
+      "@type": "schema:Dataset",
+      "schema:name": "New York Times Front Page headlines 1996–2006 (Boydstun 2013)",
+      "schema:size": 31034,
+      "schema:description": "28 CAP media categories; random subsample n=560 used for intercoder study"
+    },
+    {
+      "@id": "rdip:Dataset/GuardianPopulism",
+      "@type": "schema:Dataset",
+      "schema:name": "The Guardian Populism survey responses (2018)",
+      "schema:size": ">20,000 responses; 4,000 coded by highly-trained humans; random subset n=1,300 used for GPT-3 comparison"
+    },
+
+    {
+      "@id": "rdip:Activity/HumanCoding-AllDatasets",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Human coding of texts across four datasets (lightly-trained for PP/NYT/Congress, intensively-trained for Guardian Populism)",
+      "prov:generated": [
+        "rdip:Dataset/PigeonholingPartisans-HumanCodes",
+        "rdip:Dataset/CongressionalHearings-HumanCodes",
+        "rdip:Dataset/NYT-FrontPage-HumanCodes",
+        "rdip:Dataset/GuardianPopulism-HumanCodes"
+      ]
+    },
+
+    {
+      "@id": "rdip:Activity/GPT3-PromptEngineering",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Design of few-shot prompts (2–4 exemplars) for each coding task",
+      "prov:generated": "rdip:Dataset/GPT3-Prompts"
+    },
+
+    {
+      "@id": "rdip:Activity/GPT3-Coding-AllDatasets",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Zero/few-shot coding of all four datasets using GPT-3 (text-davinci-002/003 era)",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/OpenAI-GPT3",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "OpenAI GPT-3 (text-davinci series)",
+        "rdip:version": "not specified (2022-era commercial API)"
+      },
+      "prov:used": [
+        "rdip:Dataset/PigeonholingPartisans",
+        "rdip:Dataset/CongressionalHearings-CAP",
+        "rdip:Dataset/NYT-FrontPage-CAP",
+        "rdip:Dataset/GuardianPopulism",
+        "rdip:Dataset/GPT3-Prompts"
+      ],
+      "rdip:outputDataset": [
+        {
+          "@id": "rdip:Dataset/PigeonholingPartisans-GPT3Codes",
+          "@type": "schema:Dataset",
+          "schema:name": "GPT-3 codes for 7,675 PP descriptions (5 dimensions)"
+        },
+        {
+          "@id": "rdip:Dataset/CongressionalHearings-GPT3Codes",
+          "@type": "schema:Dataset",
+          "schema:name": "GPT-3 CAP codes for congressional hearing summaries"
+        },
+        {
+          "@id": "rdip:Dataset/NYT-FrontPage-GPT3Codes",
+          "@type": "schema:Dataset",
+          "schema:name": "GPT-3 CAP codes for 560 NYT headlines"
+        },
+        {
+          "@id": "rdip:Dataset/GuardianPopulism-GPT3Codes",
+          "@type": "schema:Dataset",
+          "schema:name": "GPT-3 binary populism codes for 1,300 Guardian responses"
+        }
+      ]
+    },
+
+    {
+      "@id": "rdip:Activity/CAP-ProbabilityCalibration",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Post-hoc calibration of GPT-3 token probabilities using balanced validation set (Zhao et al. 2021-style bias normalization)",
+      "prov:used": "rdip:Dataset/CongressionalHearings-GPT3Codes",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/CustomPython",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "Custom Python post-processing scripts",
+        "rdip:version": "unknown"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/SML-Baseline-Guardian",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Training and application of bag-of-words Support Vector Classifier (SVC) baseline on Guardian Populism data",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/scikit-learn-SVC",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "scikit-learn SVC (bag-of-words)",
+        "rdip:version": "unknown"
+      },
+      "prov:used": "rdip:Dataset/GuardianPopulism-HumanCodes",
+      "rdip:outputDataset": "rdip:Dataset/GuardianPopulism-SMLCodes"
+    },
+
+    {
+      "@id": "rdip:Activity/IntercoderAgreement-Analysis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Computation of intercoder reliability metrics (ICC1k, ICC3k, Fleiss’ kappa, joint probability of agreement) and accuracy comparisons",
+      "rdip:usedSoftware": [
+        {
+          "@id": "rdip:Software/R-or-Python-stats",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "R / Python (irr, psych, or sklearn.metrics packages implied)",
+          "rdip:version": "unknown"
+        }
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/IntercoderMetrics-Results",
+        "@type": "schema:Dataset",
+        "schema:name": "Tables and figures of agreement statistics across all four applications"
+      }
+    }
+  ]
+}
+# --- END FILE: 2306_02177v1.json ---
+
+
+# --- START FILE: 2403_01208v2.json (Path: rdip/2403_01208v2.json) ---
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/SurveyTheory-ML-Labeling",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Applying Survey Methodology and Cognitive Response Theories to Improve Quality and Transparency of Machine-Learning Training Data Labels"
+    },
+
+    {
+      "@id": "rdip:Dataset/Survey-Literature-Corpus",
+      "@type": "schema:Dataset",
+      "schema:name": "Corpus of survey methodology literature on cognitive response processes, satisficing, context effects, selection bias, and data-quality practices",
+      "schema:description": "Includes key works by Tourangeau et al. (2000, 2018), Krosnick (1991), Galesic et al. (2008), Smyth (2006), Kreuter et al., and AAPOR Transparency Initiative references"
+    },
+
+    {
+      "@id": "rdip:Dataset/ML-Labeling-Literature-Corpus",
+      "@type": "schema:Dataset",
+      "schema:name": "Corpus of ML/data-labeling studies cited as evidence or counterexamples",
+      "schema:description": "Includes Kern et al. (2023), Beck et al. (2022, 2024), Bassignana & Plank (2022), Al Kuwatly et al. (2020), Sap et al. (2022), Parrish et al. (2024), Ouyang et al. (2022), etc."
+    },
+
+    {
+      "@id": "rdip:Activity/Theory-Synthesis-Response-Process",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Synthesis of Tourangeau’s four-stage cognitive response process model and deviations (satisficing, acquiescence, straight-lining, motivated misreporting)",
+      "prov:used": "rdip:Dataset/Survey-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Response-Process-Model-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Adapted cognitive response process model for survey answering"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Context-Effects-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review and synthesis of context and order effects literature (contrast/assimilation, priming, order effects in surveys)",
+      "prov:used": "rdip:Dataset/Survey-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Context-Effects-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Summary of context and order effects applicable to labeling tasks"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Hypothesis-Derivation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Derivation of testable hypotheses about labeling quality from survey theory (wording/reading level, multiple labels format, order effects, pre-labeling/anchoring, don’t-know options, overreliance on examples)",
+      "prov:used": [
+        "rdip:Dataset/Response-Process-Model-Summary",
+        "rdip:Dataset/Context-Effects-Summary",
+        "rdip:Dataset/ML-Labeling-Literature-Corpus"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Label-Quality-Hypotheses",
+        "@type": "schema:Dataset",
+        "schema:name": "Set of hypotheses linking survey-theory constructs to ML labeling quality"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Selection-Bias-Framework-Adaptation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Adaptation of survey nonresponse/selection-bias framework (Groves 2006) to ML labeler recruitment and label assignment",
+      "prov:used": "rdip:Dataset/Survey-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Selection-Bias-ML-Framework",
+        "@type": "schema:Dataset",
+        "schema:name": "Causal diagram (Figure 4) and theoretical argument for selection bias in training labels"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Mitigation-Measures-Synthesis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Synthesis of mitigation strategies from survey methodology (randomization, cognitive interviewing, paradata, feedback prompts, test observations, weighting) and their proposed application to ML labeling",
+      "prov:used": [
+        "rdip:Dataset/Survey-Literature-Corpus",
+        "rdip:Dataset/Label-Quality-Hypotheses"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Mitigation-Recommendations",
+        "@type": "schema:Dataset",
+        "schema:name": "List of practical mitigation measures and transparency recommendations for ML label collection"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Transparency-Advocacy",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Argument for mandatory detailed documentation of labeling instruments, prompts, examples, labeler demographics, and process (modeled on AAPOR Transparency Initiative)",
+      "prov:used": [
+        "rdip:Dataset/Survey-Literature-Corpus",
+        "rdip:Dataset/ML-Labeling-Literature-Corpus"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Transparency-Call",
+        "@type": "schema:Dataset",
+        "schema:name": "Call for standardized reporting of label-collection provenance in ML papers and datasets"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Final-Integration",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Integration of all theoretical syntheses, hypothesis derivation, and recommendations into final methodology/theory section",
+      "prov:used": [
+        "rdip:Dataset/Label-Quality-Hypotheses",
+        "rdip:Dataset/Selection-Bias-ML-Framework",
+        "rdip:Dataset/Mitigation-Recommendations",
+        "rdip:Dataset/Transparency-Call"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Final-Methodology-Section",
+        "@type": "schema:Dataset",
+        "schema:name": "Published 'Science of Data Collection' methodology section applying survey theory to ML labeling"
+      }
+    }
+  ]
+}
+# --- END FILE: 2403_01208v2.json ---
+
+
+# --- START FILE: 2410_01837v1.json (Path: rdip/2410_01837v1.json) ---
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/Code-Survey",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Code-Survey: An LLM-Driven Methodology for Structuring and Analyzing Large-Scale Unstructured Software Engineering Data (Linux Kernel eBPF Case Study)"
+    },
+
+    {
+      "@id": "rdip:Dataset/Linux-eBPF-Commits-Raw",
+      "@type": "schema:Dataset",
+      "schema:name": "Raw Linux kernel eBPF-related commits (2017–2024)",
+      "schema:size": ">15,000 commits",
+      "schema:description": "Git commits filtered by eBPF-related keywords, containing commit ID, author, date, message, diff, and associated files"
+    },
+
+    {
+      "@id": "rdip:Activity/Survey-Design",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Design of structured Code-Survey questionnaire (7 main questions + I’m not sure options)",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Code-Survey-Questionnaire",
+        "@type": "schema:Dataset",
+        "schema:name": "Final eBPF commit survey with 7 structured questions (summary, keywords, classification, complexity, components, logic, use-cases)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Prompt-Engineering-LLM-Survey",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Construction of per-commit prompts containing survey + commit metadata + diff",
+      "prov:used": [
+        "rdip:Dataset/Linux-eBPF-Commits-Raw",
+        "rdip:Dataset/Code-Survey-Questionnaire"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Per-Commit-Prompts",
+        "@type": "schema:Dataset",
+        "schema:name": ">15,000 individualized prompts for GPT-4o"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/LLM-Survey-Execution",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Automated survey completion by GPT-4o (single pass per commit)",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/OpenAI-GPT-4o",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "OpenAI GPT-4o (via API or GPTs interface)",
+        "rdip:version": "2024-2025 release (gpt-4o)"
+      },
+      "prov:used": "rdip:Dataset/Per-Commit-Prompts",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/LLM-Survey-Responses-JSON",
+        "@type": "schema:Dataset",
+        "schema:name": "Structured JSON survey responses for >15,000 eBPF commits"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Data-Cleaning-Validation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Post-processing, cleaning, and manual validation of LLM responses (merge commits, unrelated commits, consistency checks)",
+      "prov:used": "rdip:Dataset/LLM-Survey-Responses-JSON",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/commit_survey.csv",
+        "@type": "schema:Dataset",
+        "schema:name": "Final cleaned commit_survey.csv dataset with structured fields (classification, complexity, components, etc.)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Quantitative-Analysis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Statistical and temporal analysis of structured survey data (time-series smoothing, distributions, trends)",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/Python-Pandas-Matplotlib",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "Python (Pandas, Matplotlib/Seaborn, SciPy for smoothing)",
+        "rdip:version": "unknown"
+      },
+      "prov:used": "rdip:Dataset/commit_survey.csv",
+      "rdip:outputDataset": [
+        {
+          "@id": "rdip:Dataset/Figures-2-17",
+          "@type": "schema:Dataset",
+          "schema:name": "All timeline, distribution, and dependency figures (Figures 2–17)"
+        },
+        {
+          "@id": "rdip:Dataset/Quantitative-Insights",
+          "@type": "schema:Dataset",
+          "schema:name": "Derived insights on bug distribution, component evolution, feature dependencies, libbpf lifecycle, etc."
+        }
+      ]
+    },
+
+    {
+      "@id": "rdip:Activity/Expert-Validation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Expert review and confirmation by >5 eBPF developers/maintainers and ongoing discussion on BPF mailing list",
+      "prov:used": [
+        "rdip:Dataset/commit_survey.csv",
+        "rdip:Dataset/Quantitative-Insights"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Expert-Feedback",
+        "@type": "schema:Dataset",
+        "schema:name": "Qualitative expert confirmation and planned rating of sampled responses"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Methodology-Refinement-Planning",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Planned future improvements (multi-run averaging, O1 model, multi-agent, refined prompts, expert rating of responses)",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Future-Work-Plan",
+        "@type": "schema:Dataset",
+        "schema:name": "Roadmap for enhancing Code-Survey accuracy and coverage"
+      }
+    }
+  ]
+}
+# --- END FILE: 2410_01837v1.json ---
+
+
+# --- START FILE: 2410_22481v1.json (Path: rdip/2410_22481v1.json) ---
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/HIV-Retention-Bayesian-Transition-Model",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Development and application of a Bayesian Transition Model for HIV care retention with censored and competing-risk outcomes"
+    },
+    {
+      "@id": "rdip:Dataset/AMPATH-EHR-2014-2023",
+      "@type": "schema:Dataset",
+      "schema:name": "AMPATH electronic health records (first visit, adults with HIV, 2014-01-01 to 2023-07-31)",
+      "schema:size": 11011,
+      "schema:description": "Patient-level data from four clinics (Kitale, Busia, Uasin Gishu District Hospital, KCRH Module A) containing scheduled return time, gender, age, ARV status, clinic, viral load (partially missing), CD4 count (partially missing), observed return times, death indicators, and administrative censoring.",
+      "prov:wasGeneratedBy": "rdip:Activity/DataCollection-AMPATH"
+    },
+    {
+      "@id": "rdip:Activity/DataCollection-AMPATH",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Routine collection of electronic health records in AMPATH HIV care program",
+      "prov:used": "rdip:Dataset/AMPATH-EHR-2014-2023"
+    },
+    {
+      "@id": "rdip:Activity/SimulationStudy",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Monte-Carlo simulation of training (n=500) and test (n=500, no censoring) datasets under varying censoring and covariate-missingness scenarios",
+      "prov:generated": [
+        "rdip:Dataset/SimulatedTrainingSets",
+        "rdip:Dataset/SimulatedTestSets"
+      ],
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/CustomRCode",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "Custom R / Stan code (not explicitly named)",
+        "rdip:version": "unknown"
+      }
+    },
+    {
+      "@id": "rdip:Activity/BayesianTransitionModel-RealData",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Fitting of stratified Bayesian cause-specific hazard transition models (BTM) on AMPATH data",
+      "prov:used": "rdip:Dataset/AMPATH-EHR-2014-2023",
+      "rdip:usedSoftware": [
+        {
+          "@id": "rdip:Software/RStan",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "RStan (implied Bayesian implementation)",
+          "rdip:version": "unknown"
+        }
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/BTM-PosteriorDraws-AMPATH",
+        "@type": "schema:Dataset",
+        "schema:name": "Posterior draws of stratified cause-specific hazard parameters (clinic × scheduled time × missingness pattern strata), with b-splines for viral load and CD4 when observed"
+      }
+    },
+    {
+      "@id": "rdip:Activity/BART-Comparison-RealData",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Fitting of stratified BART models on AMPATH data for comparison",
+      "prov:used": "rdip:Dataset/AMPATH-EHR-2014-2023",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/BART-Rpackage",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "R package BART (Bayesian Additive Regression Trees)",
+        "rdip:version": "unknown (Chipman et al., 2010 implementation)"
+      }
+    },
+    {
+      "@id": "rdip:Activity/LogisticComparison-RealData",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Maximum-likelihood logistic regression of dichotomous retention outcome (stratified by missingness pattern)",
+      "prov:used": "rdip:Dataset/AMPATH-EHR-2014-2023",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/R-glm",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "R glm() or equivalent",
+        "rdip:version": "unknown"
+      }
+    },
+    {
+      "@id": "rdip:Activity/PostProcessing-Predictions",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Post-processing of stored posterior draws to compute retention probabilities Ψ^s_j(h; ∆), optimal scheduling decisions, credible intervals, and ternary plots for test-set subjects",
+      "prov:used": "rdip:Dataset/BTM-PosteriorDraws-AMPATH",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/CustomRPostprocessing",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "Custom R post-processing scripts",
+        "rdip:version": "unknown"
+      },
+      "rdip:outputDataset": [
+        {
+          "@id": "rdip:Dataset/TestSet-Predictions-BTM",
+          "@type": "schema:Dataset",
+          "schema:name": "Retention probabilities, credible intervals, and posterior PMFs of optimal scheduling time for 1,000 held-out AMPATH patients"
+        }
+      ]
+    },
+    {
+      "@id": "rdip:Activity/PerformanceEvaluation-Simulation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Calculation of average test-set AUC and optimal-scheduling accuracy across 300 simulated datasets for BTM, BART, and Logistic models",
+      "prov:generated": "rdip:Dataset/Table1-Results"
+    }
+  ]
+}
+# --- END FILE: 2410_22481v1.json ---
+
+
+# --- START FILE: 2501_11632v2.json (Path: rdip/2501_11632v2.json) ---
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/Biomedical-KG-Review-2024",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Comprehensive Review of Biomedical Knowledge Graphs: Methods, Applications, and Future Directions"
+    },
+
+    {
+      "@id": "rdip:Dataset/BKG-Literature-Corpus",
+      "@type": "schema:Dataset",
+      "schema:name": "Corpus of >180 publications on biomedical knowledge graphs (2015–2024)",
+      "schema:description": "Includes works on rule-based inference, probabilistic inference, KGC (TransE/TransH/RESCAL/DistMult/ComplEx/GNNs), logical explanation, assisted interpretation (LLM+RAG), and applications in information retrieval, CDS, QA, drug discovery, and scientific research"
+    },
+
+    {
+      "@id": "rdip:Activity/Literature-Collection-Search",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Systematic search and collection of biomedical KG literature across databases (PubMed, arXiv, Google Scholar, etc.)",
+      "rdip:outputDataset": "rdip:Dataset/BKG-Literature-Corpus"
+    },
+
+    {
+      "@id": "rdip:Activity/Inference-Methods-Taxonomy",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Taxonomic synthesis of KG inference methods (rule-based, probabilistic, prediction via rule-based and embedding-based)",
+      "prov:used": "rdip:Dataset/BKG-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Inference-Taxonomy",
+        "@type": "schema:Dataset",
+        "schema:name": "Hierarchical classification of inference techniques in BKGs"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Embedding-Techniques-Classification",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Classification of KGE models into translational (TransE/TransH/TransR), semantic matching (RESCAL/DistMult/ComplEx), and GNN-based approaches",
+      "prov:used": "rdip:Dataset/BKG-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/KGE-Classification",
+        "@type": "schema:Dataset",
+        "schema:name": "Sub-taxonomy of knowledge graph embedding methods used in biomedicine"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Interpretation-Methods-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review and dichotomy of knowledge interpretation methods (logical explanation via paths/subgraphs vs. assisted interpretation via LLMs/RAG)",
+      "prov:used": "rdip:Dataset/BKG-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Interpretation-Taxonomy",
+        "@type": "schema:Dataset",
+        "schema:name": "Logical vs. assisted (LLM-augmented) explanation approaches in BKGs"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Application-Domains-Mapping",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Mapping of BKG applications to five major domains: Information Retrieval, Clinical Decision Support, Intelligent QA, Drug Discovery, Scientific Research",
+      "prov:used": "rdip:Dataset/BKG-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/BKG-Applications-Framework",
+        "@type": "schema:Dataset",
+        "schema:name": "Figure 4 – Comprehensive application framework of biomedical knowledge graphs"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Narrative-Synthesis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Narrative integration of inference, interpretation, and application findings into review manuscript section",
+      "prov:used": [
+        "rdip:Dataset/Inference-Taxonomy",
+        "rdip:Dataset/KGE-Classification",
+        "rdip:Dataset/Interpretation-Taxonomy",
+        "rdip:Dataset/BKG-Applications-Framework"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Final-Review-Section",
+        "@type": "schema:Dataset",
+        "schema:name": "Published methodology/review section on biomedical knowledge graph techniques and applications"
+      }
+    }
+  ]
+}
+# --- END FILE: 2501_11632v2.json ---
+
+
+# --- START FILE: 2502_07068v2.json (Path: rdip/2502_07068v2.json) ---
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/PubLayNet",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "PubLayNet: Large-Scale Automatic Annotation of Document Layout in PubMed Central Open Access Subset (Xu et al., 2020)"
+    },
+
+    {
+      "@id": "rdip:Dataset/PMCOA-XML-PDF-2018",
+      "@type": "schema:Dataset",
+      "schema:name": "PubMed Central Open Access Subset (downloaded 2018-10-03)",
+      "schema:size": "1,162,856 articles with complete XML + PDF",
+      "schema:description": "Articles provided under Creative Commons, containing both PDF and NLM-JATS XML representations"
+    },
+
+    {
+      "@id": "rdip:Activity/XML-Preprocessing",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "XML cleaning and standardization (remove math/formula nodes, move list/table/figure to floats-group)",
+      "prov:used": "rdip:Dataset/PMCOA-XML-PDF-2018",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PMCOA-XML-Cleaned",
+        "@type": "schema:Dataset",
+        "schema:name": "Standardized NLM-JATS XML trees"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/PDF-Parsing",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "PDF parsing with PDFMiner to extract textboxes, textlines, images, geometric shapes",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/PDFMiner",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "PDFMiner",
+        "rdip:version": "2018-era"
+      },
+      "prov:used": "rdip:Dataset/PMCOA-XML-PDF-2018",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PMCOA-PDF-Layout-Elements",
+        "@type": "schema:Dataset",
+        "schema:name": "Raw PDF layout primitives (textboxes, images, shapes) with bounding boxes"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/String-Normalization",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Unicode KD normalization of all strings from XML and PDF",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Normalized-Strings",
+        "@type": "schema:Dataset"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/PDF-XML-Matching",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Fuzzy string matching (Levenshtein via fuzzysearch) + adaptive distance threshold + sequential textline matching",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/fuzzysearch",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "fuzzysearch Python package"
+      },
+      "prov:used": [
+        "rdip:Dataset/PMCOA-XML-Cleaned",
+        "rdip:Dataset/PMCOA-PDF-Layout-Elements",
+        "rdip:Dataset/Normalized-Strings"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Matched-Layout-Elements",
+        "@type": "schema:Dataset",
+        "schema:name": "PDF elements matched to XML nodes with preliminary category labels"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Figure-Table-Body-Annotation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Margin-based annotation of figure/table bodies using main-text box and caption position",
+      "prov:used": "rdip:Dataset/Matched-Layout-Elements",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Figure-Table-Bodies",
+        "@type": "schema:Dataset"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Segmentation-Generation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Polygon segmentation generation from textlines (horizontal/vertical edges only) + reuse bbox for figures/tables",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PubLayNet-Segmentations",
+        "@type": "schema:Dataset"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Quality-Control-Filtering",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Annotation quality filtering (>99% coverage for non-title pages, >90% for title pages) + manual curation of dev/test",
+      "prov:used": [
+        "rdip:Dataset/Matched-Layout-Elements",
+        "rdip:Dataset/Figure-Table-Bodies",
+        "rdip:Dataset/PubLayNet-Segmentations"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PubLayNet-Final",
+        "@type": "schema:Dataset",
+        "schema:name": "PubLayNet dataset",
+        "schema:size": "Training: 340,391 pages; Dev: 11,858 pages; Test: 11,983 pages (5 categories: Text, Title, List, Table, Figure)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Train-Dev-Test-Split",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Journal-level stratified split + balanced sampling per category + manual curation of dev/test",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PubLayNet-Partitions",
+        "@type": "schema:Dataset",
+        "schema:name": "Official PubLayNet train/val/test splits (Table II)"
+      }
+    }
+  ]
+}
+# --- END FILE: 2502_07068v2.json ---
+
+
+# --- START FILE: 2502_19679v1.json (Path: rdip/2502_19679v1.json) ---
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/LLM-Reliability-Survey-Interventions",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Evaluating LLM Annotation Reliability Using Survey-Methodology-Inspired Interventions and Information-Theoretic Scoring"
+    },
+
+    {
+      "@id": "rdip:Dataset/F1000-Expert-Annotations",
+      "@type": "schema:Dataset",
+      "schema:name": "F1000 (Faculty Opinions) expert-labeled biomedical papers",
+      "schema:size": 816,
+      "schema:description": "816 biomedical papers with expert-assigned contribution tags (Interesting Hypothesis 7.5%, Technical Advance 13.3%, New Finding 79%) after cleaning"
+    },
+
+    {
+      "@id": "rdip:Dataset/MAG-Citation-Data",
+      "@type": "schema:Dataset",
+      "schema:name": "Microsoft Academic Graph (MAG) citation counts merged with F1000 papers",
+      "schema:description": "Citation counts (within 3 years) for the 816 F1000 papers, matched via PMID → MAG PaperID, log(citations+1) transformed"
+    },
+
+    {
+      "@id": "rdip:Activity/Data-Merging-Cleaning",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Merging F1000 expert annotations with MAG citation data and preprocessing",
+      "prov:used": [
+        "rdip:Dataset/F1000-Expert-Annotations",
+        "rdip:Dataset/MAG-Citation-Data"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/F1000-MAG-Merged",
+        "@type": "schema:Dataset",
+        "schema:name": "Final analysis dataset of 816 papers with expert labels, citations, year, and team size"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/LLM-Inference-Setup",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Zero-shot/few-shot inference on LLaMA-3.1-Instruct 8B/70B/405B using TogetherAI API",
+      "rdip:usedSoftware": [
+        {
+          "@id": "rdip:Software/LLaMA-3.1-Instruct",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "LLaMA-3.1-Instruct (8B, 70B, 405B variants)",
+          "rdip:version": "2024 open-weight release"
+        },
+        {
+          "@id": "rdip:Software/TogetherAI-API",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "TogetherAI inference API",
+          "rdip:version": "2024–2025"
+        }
+      ],
+      "schema:description": "Inference parameters: temperature=0, top_p=0.7, logprobs=True, max_tokens=1",
+      "prov:used": "rdip:Dataset/F1000-MAG-Merged"
+    },
+
+    {
+      "@id": "rdip:Activity/Prompt-Design",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Design of base multiple-choice prompt template for contribution-type classification",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Base-Prompt-Template",
+        "@type": "schema:Dataset",
+        "schema:name": "Standard multiple-choice prompt with fixed option order A/B/C"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Survey-Interventions-Implementation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Systematic application of three survey-inspired prompt perturbations (Option Randomization, Position Randomization, Reverse Validation)",
+      "prov:used": "rdip:Dataset/Base-Prompt-Template",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Intervention-Perturbed-Prompts",
+        "@type": "schema:Dataset",
+        "schema:name": "6 perturbed prompt variants per paper (2 option orders × 3 position variants × reverse-coded)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/LLM-Intervention-Runs",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Execution of all intervention prompts on 816 papers across three LLaMA-3.1 models with logprobs",
+      "rdip:usedSoftware": "rdip:Software/TogetherAI-API",
+      "prov:used": [
+        "rdip:Dataset/F1000-MAG-Merged",
+        "rdip:Dataset/Intervention-Perturbed-Prompts"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/LLM-Intervention-Outputs",
+        "@type": "schema:Dataset",
+        "schema:name": "Raw token predictions and full logprob distributions for all intervention conditions"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Independent-Probability-Assessment",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Independent binary yes/no queries for each contribution category to eliminate causal attention bias",
+      "schema:description": "Three separate API calls per paper: 'Is the main contribution Technical Advance? Yes/No' etc.",
+      "rdip:usedSoftware": "rdip:Software/TogetherAI-API",
+      "prov:used": "rdip:Dataset/F1000-MAG-Merged",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Independent-Probabilities",
+        "@type": "schema:Dataset",
+        "schema:name": "Per-category p(Yes) probabilities for 816 papers × 3 categories × 3 models"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/R-Score-Computation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Computation of information-theoretic reliability score (R-score = D_KL(P || U)) with empirical thresholds",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/Python-NumPy-SciPy",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "Python (NumPy/SciPy for KL divergence)",
+        "rdip:version": "unknown"
+      },
+      "prov:used": "rdip:Dataset/Independent-Probabilities",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/R-Scores",
+        "@type": "schema:Dataset",
+        "schema:name": "Per-paper R-scores and reliability tiers (Very Low / Low / Moderate / High) for each model"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Downstream-Regression-Example",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Linear regression of log(citations+1) ~ predicted contribution type (expert vs. LLM labels) with controls",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/Python-statsmodels",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "Python statsmodels / scikit-learn",
+        "rdip:version": "unknown"
+      },
+      "prov:used": [
+        "rdip:Dataset/F1000-MAG-Merged",
+        "rdip:Dataset/LLM-Intervention-Outputs"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Regression-Results",
+        "@type": "schema:Dataset",
+        "schema:name": "Coefficients showing downstream impact of LLM vs. expert labels on citation prediction"
+      }
+    }
+  ]
+}
+# --- END FILE: 2502_19679v1.json ---
+
+
+# --- START FILE: 2508_13123v1.json (Path: rdip/2508_13123v1.json) ---
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/HIV-Immune-Response-Reconstruction",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Parameter Identification of Time-Dependent Immune Response Coefficient E(t) in HIV Dynamical Model via Tikhonov Regularization and Adaptive Finite Elements"
+    },
+
+    {
+      "@id": "rdip:Dataset/HIV-Clinical-Data",
+      "@type": "schema:Dataset",
+      "schema:name": "Clinical HIV patient data (4 patients)",
+      "schema:description": "Time-series measurements of total T-cells (uninfected + infected) and virus load from Tables 2–3, interpolated to daily points"
+    },
+
+    {
+      "@id": "rdip:Activity/Data-Interpolation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Linear interpolation of sparse clinical measurements to daily time grid [0,363]",
+      "prov:used": "rdip:Dataset/HIV-Clinical-Data",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Interpolated-Clinical-Data",
+        "@type": "schema:Dataset",
+        "schema:name": "Daily interpolated g1(t) and g2(t) for 4 patients"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Theory-Development",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Derivation of Lagrangian, adjoint system, Fréchet derivative, and a posteriori error estimates for Tikhonov functional",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Mathematical-Framework",
+        "@type": "schema:Dataset",
+        "schema:name": "Equations (4.9)–(6.67): Optimality system, adjoint problem, gradient expression, error estimators"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Numerical-Discretization",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Finite-element (P0) + implicit Euler discretization of forward/adjoint problems + Newton solver",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Discretized-System",
+        "@type": "schema:Dataset",
+        "schema:name": "Piecewise-constant FEM spaces, Newton schemes (5.33) & (5.40)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/ACGA-Implementation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Implementation of Adaptive Conjugate Gradient Algorithm (ACGA) with residual-based mesh refinement",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/MATLAB-R2023b",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "MATLAB",
+        "rdip:version": "R2023b"
+      },
+      "prov:used": [
+        "rdip:Dataset/Interpolated-Clinical-Data",
+        "rdip:Dataset/Mathematical-Framework",
+        "rdip:Dataset/Discretized-System"
+      ],
+      "rdip:outputDataset": [
+        {
+          "@id": "rdip:Dataset/Reconstructed-E-functions",
+          "@type": "schema:Dataset",
+          "schema:name": "Reconstructed immune response E_k(t) on adaptively refined meshes for 4 patients"
+        },
+        {
+          "@id": "rdip:Dataset/Simulated-Trajectories",
+          "@type": "schema:Dataset",
+          "schema:name": "Forward solutions u1+u2, u3 matching clinical data after optimization"
+        },
+        {
+          "@id": "rdip:Dataset/Numerical-Figures",
+          "@type": "schema:Dataset",
+          "schema:name": "Figures 3–25: Reconstructions, virus dynamics, residuals, convergence plots"
+        }
+      ]
+    },
+
+    {
+      "@id": "rdip:Activity/CTL-Initial-Guess-Modeling",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Modeling of initial guess E0(t) and d(t) with cytotoxic T-lymphocyte (CTL) response (Eq. 8.74)",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Initial-Guess-E0",
+        "@type": "schema:Dataset",
+        "schema:name": "Patient-specific E0(t) with CTL burst parameters"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Validation-Error-Analysis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Computation of relative residuals R1, R2 and convergence monitoring on refined meshes",
+      "prov:used": [
+        "rdip:Dataset/Reconstructed-E-functions",
+        "rdip:Dataset/Simulated-Trajectories"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Validation-Metrics",
+        "@type": "schema:Dataset",
+        "schema:name": "Table 4 + Figures showing residuals, gradient norms, mesh refinement statistics"
+      }
+    }
+  ]
+}
+# --- END FILE: 2508_13123v1.json ---

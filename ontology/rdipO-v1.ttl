@@ -1,0 +1,332 @@
+@base <https://www.ait.ac.th/rdip/rdipO/v1> .
+# @base <https://<your-username>.github.io/rdip-ontology/rdipO/v1> .
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix rdip: <https://www.ait.ac.th/rdip/rdipO/v1#> .
+@prefix vivo: <http://vivoweb.org/ontology/core#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix schema: <https://schema.org/> . # To make our ontology Interoperable ('I' of the FAIR Principles)
+
+<https://www.ait.ac.th/rdip/rdipO/v1> a owl:Ontology ;
+  rdfs:label "Research Data Intelligence Platform Ontology" ;
+  rdfs:comment "Core ontology for representing research projects, activities, datasets, software and publications on an open science platform." ;
+  owl:versionIRI <https://www.ait.ac.th/rdip/rdipO/v1> ;
+  owl:versionInfo "v1" ;
+  owl:imports
+      <http://vivoweb.org/ontology/core> ,
+      <http://purl.org/ontology/bibo/> ,
+      <http://www.w3.org/ns/dcat#> ,
+      <http://www.w3.org/ns/prov-o#> ,
+      <http://purl.org/spar/cito/> .
+
+#################################################################
+# CLASSES
+#################################################################
+
+rdip:ResearchProject a owl:Class ;
+  owl:equivalentClass schema:Project ;
+  rdfs:subClassOf prov:Entity ;
+  rdfs:label "Research project" ;
+  rdfs:comment "A research project that groups together activities, participants and outputs such as datasets, software and publications." .
+
+rdip:ResearchActivity a owl:Class ;
+  rdfs:subClassOf prov:Activity ;
+  rdfs:label "Research activity" ;
+  rdfs:comment "Any activity in the research lifecycle, including planning, data collection, processing, analysis, publishing and preservation." .
+
+rdip:PlanningActivity a owl:Class ;
+  rdfs:subClassOf rdip:ResearchActivity ;
+  rdfs:label "Planning activity" ;
+  rdfs:comment "Activities concerned with planning and designing research, including study design, protocol development and ethical review preparation." .
+
+rdip:DataCollectionActivity a owl:Class ;
+  rdfs:subClassOf rdip:ResearchActivity ;
+  rdfs:label "Data collection activity" ;
+  rdfs:comment "Activities that collect or capture raw data, such as experiments, surveys, interviews, observations or sensor measurements." .
+
+rdip:DataProductionActivity a owl:Class ;
+  rdfs:subClassOf rdip:ResearchActivity ;
+  rdfs:label "Data production activity" ;
+  rdfs:comment "Activities that produce one or more datasets from instruments, simulations or integrated data pipelines, often combining collection and initial processing steps." .
+
+rdip:DataProcessingActivity a owl:Class ;
+  rdfs:subClassOf rdip:ResearchActivity ;
+  rdfs:label "Data processing activity" ;
+  rdfs:comment "Activities that clean, transform, integrate, anonymize or otherwise modify existing datasets without necessarily collecting new raw data." .
+
+rdip:DataAnalysisActivity a owl:Class ;
+  rdfs:subClassOf rdip:ResearchActivity ;
+  rdfs:label "Data analysis activity" ;
+  rdfs:comment "Activities that analyse datasets to derive results, statistics, models or other derived knowledge artifacts." .
+
+rdip:DataPublishingActivity a owl:Class ;
+  rdfs:subClassOf rdip:ResearchActivity ;
+  rdfs:label "Data publishing activity" ;
+  rdfs:comment "Activities that publish or share datasets, for example depositing them into repositories, assigning identifiers and configuring access conditions." .
+
+rdip:DataPreservationActivity a owl:Class ;
+  rdfs:subClassOf rdip:ResearchActivity ;
+  rdfs:label "Data preservation activity" ;
+  rdfs:comment "Activities that preserve datasets for the long term, including migration, integrity checking and replication." .
+
+rdip:PublicationActivity a owl:Class ;
+  rdfs:subClassOf rdip:ResearchActivity ;
+  rdfs:label "Publication activity" ;
+  rdfs:comment "Activities that produce scholarly publications such as journal articles, conference papers or reports based on research outputs." .
+
+rdip:SoftwareDevelopmentActivity a owl:Class ;
+  rdfs:subClassOf rdip:ResearchActivity ;
+  rdfs:label "Software development activity" ;
+  rdfs:comment "Activities that design, implement, test or maintain research software which may itself become an output of the project or be used in other activities." .
+
+rdip:RoleInActivity a owl:Class ;
+  rdfs:subClassOf prov:Role ;
+  rdfs:label "Role in activity" ;
+  rdfs:comment "The specific role that a person has within a particular research activity, such as data collector, analyst, software engineer or principal investigator." .
+
+rdip:SoftwareApplication a owl:Class ;
+  rdfs:subClassOf prov:Entity ;
+  rdfs:label "Research software" ;
+  rdfs:comment "Software or computational tools that are used during research activities or produced as outputs of research projects." .
+
+rdip:Method a owl:Class ;
+  rdfs:subClassOf prov:Plan ;
+  rdfs:label "Research method or protocol" ;
+  rdfs:comment "A formal method, protocol, or workflow specification followed by one or more research activities." .
+
+#################################################################
+# OBJECT PROPERTIES
+#################################################################
+
+rdip:hasActivity a owl:ObjectProperty ;
+  owl:inverseOf rdip:isPartOfProject ;
+  rdfs:domain rdip:ResearchProject ;
+  rdfs:range rdip:ResearchActivity ;
+  rdfs:label "has activity" ;
+  rdfs:comment "Links a research project to a research activity that is part of that project." .
+
+rdip:isPartOfProject a owl:ObjectProperty ;
+  rdfs:domain rdip:ResearchActivity ;
+  rdfs:range rdip:ResearchProject ;
+  rdfs:label "is part of project" ;
+  rdfs:comment "Links a research activity to the research project that it belongs to." .
+
+rdip:hasOutput a owl:ObjectProperty ;
+  owl:inverseOf rdip:isOutputOf ;
+  rdfs:domain rdip:ResearchProject ;
+  rdfs:range prov:Entity ;
+  rdfs:label "has output" ;
+  rdfs:comment "Links a research project to one of its outputs, such as a dataset, software package or publication." .
+
+rdip:isOutputOf a owl:ObjectProperty ;
+  rdfs:domain prov:Entity ;
+  rdfs:range rdip:ResearchProject ;
+  rdfs:label "is output of" ;
+  rdfs:comment "Indicates that an entity, such as a dataset, software package or publication, is an output of a research project." .
+
+rdip:usedDataset a owl:ObjectProperty ;
+  rdfs:subPropertyOf prov:used ;
+  rdfs:domain rdip:ResearchActivity ;
+  rdfs:range dcat:Dataset ;
+  rdfs:label "used dataset" ;
+  rdfs:comment "Indicates that a research activity used a dataset as input." .
+
+rdip:usedSoftware a owl:ObjectProperty ;
+  rdfs:subPropertyOf prov:used ;
+  rdfs:domain rdip:ResearchActivity ;
+  rdfs:range rdip:SoftwareApplication ;
+  rdfs:label "used software" ;
+  rdfs:comment "Indicates that a research activity used a particular software or tool." .
+
+rdip:hasActivityRole a owl:ObjectProperty ;
+  rdfs:domain rdip:ResearchActivity ;
+  rdfs:range rdip:RoleInActivity ;
+  rdfs:label "has activity role" ;
+  rdfs:comment "Associates a research activity with a role that specifies how a person participates in that activity." .
+
+rdip:rolePerformedBy a owl:ObjectProperty ;
+  rdfs:domain rdip:RoleInActivity ;
+  rdfs:range vivo:Person ;
+  rdfs:label "role performed by" ;
+  rdfs:comment "Links a role-in-activity to the person who performed that role." .
+
+rdip:hasParticipant a owl:ObjectProperty ;
+  rdfs:domain rdip:ResearchProject ;
+  rdfs:range vivo:Person ;
+  rdfs:label "has participant" ;
+  rdfs:comment "Relates a research project to a person who participates in the project in any capacity." .
+
+rdip:hasLeadOrganization a owl:ObjectProperty ;
+  rdfs:domain rdip:ResearchProject ;
+  rdfs:range vivo:Organization ;
+  rdfs:label "has lead organization" ;
+  rdfs:comment "Identifies the main organization responsible for leading or hosting a research project." .
+
+rdip:generatesDataset a owl:ObjectProperty ;
+  rdfs:subPropertyOf prov:generated ;
+  rdfs:domain rdip:ResearchActivity ;
+  rdfs:range dcat:Dataset ;
+  rdfs:label "generates dataset" ;
+  rdfs:comment "Indicates that a research activity produced a dataset as one of its outputs." .
+
+rdip:generatesSoftware a owl:ObjectProperty ;
+  rdfs:subPropertyOf prov:generated ;
+  rdfs:domain rdip:SoftwareDevelopmentActivity ;
+  rdfs:range rdip:SoftwareApplication ;
+  rdfs:label "generates software" ;
+  rdfs:comment "Indicates that a software development activity produced a software artifact as output." .
+
+rdip:generatesPublication a owl:ObjectProperty ;
+  rdfs:subPropertyOf prov:generated ;
+  rdfs:domain rdip:PublicationActivity ;
+  rdfs:range bibo:Document ;
+  rdfs:label "generates publication" ;
+  rdfs:comment "Indicates that a publication activity produced a scholarly publication as output." .
+
+rdip:isDocumentedBy a owl:ObjectProperty ;
+  rdfs:domain rdip:ResearchActivity ;
+  rdfs:range bibo:Document ;
+  rdfs:label "is documented by" ;
+  rdfs:comment "Links a research activity to a document that describes or reports on that activity, such as a lab protocol or methods section." .
+
+rdip:citesDataset a owl:ObjectProperty ;
+  rdfs:subPropertyOf cito:citesAsDataSource ;
+  rdfs:domain bibo:Document ;
+  rdfs:range dcat:Dataset ;
+  rdfs:label "cites dataset" ;
+  rdfs:comment "Indicates that a publication cites a dataset as a data source." .
+
+rdip:usedMethod a owl:ObjectProperty ;
+  rdfs:subPropertyOf prov:used ;
+  rdfs:domain rdip:ResearchActivity ;
+  rdfs:range  rdip:Method ;
+  rdfs:label "used method" ;
+  rdfs:comment "Links a research activity to a formal method or protocol that was used in that activity." .
+
+#################################################################
+# DATA PROPERTIES
+#################################################################
+
+rdip:identifier a owl:DatatypeProperty ;
+  rdfs:domain prov:Entity ;
+  rdfs:range xsd:string ;
+  rdfs:label "identifier" ;
+  rdfs:comment "A local or global identifier for an entity, such as a project code, DOI or accession number." .
+
+rdip:title a owl:DatatypeProperty ;
+  rdfs:domain prov:Entity ;
+  rdfs:range xsd:string ;
+  rdfs:label "title" ;
+  rdfs:comment "A human-readable title or name for an entity, such as a project, dataset, software package or publication." .
+
+rdip:description a owl:DatatypeProperty ;
+  rdfs:domain prov:Entity ;
+  rdfs:range xsd:string ;
+  rdfs:label "description" ;
+  rdfs:comment "A free-text description of an entity, providing additional contextual information." .
+
+rdip:activityDescription a owl:DatatypeProperty ;
+  rdfs:domain rdip:ResearchActivity ;
+  rdfs:range xsd:string ;
+  rdfs:label "activity description" ;
+  rdfs:comment "A free-text description of what was done during a research activity." .
+
+rdip:roleLabel a owl:DatatypeProperty ;
+  rdfs:domain rdip:RoleInActivity ;
+  rdfs:range xsd:string ;
+  rdfs:label "role label" ;
+  rdfs:comment "A human-readable label for a role in activity, such as 'Data Collector' or 'Software Engineer'." .
+
+rdip:activityStart a owl:DatatypeProperty ;
+  rdfs:domain rdip:ResearchActivity ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "activity start" ;
+  rdfs:comment "The date and time at which a research activity started." .
+
+rdip:activityEnd a owl:DatatypeProperty ;
+  rdfs:domain rdip:ResearchActivity ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "activity end" ;
+  rdfs:comment "The date and time at which a research activity ended." .
+
+rdip:accessLevel a owl:DatatypeProperty ;
+  rdfs:domain dcat:Dataset ;
+  rdfs:range xsd:string ;
+  rdfs:label "access level" ;
+  rdfs:comment "A textual indication of how a dataset may be accessed, for example 'open', 'restricted' or 'closed'." .
+
+rdip:landingPage a owl:DatatypeProperty ;
+  rdfs:domain dcat:Dataset ;
+  rdfs:range xsd:anyURI ;
+  rdfs:label "landing page" ;
+  rdfs:comment "A URI for a human-readable landing page that provides access to or information about a dataset." .
+
+rdip:version a owl:DatatypeProperty ;
+  rdfs:domain prov:Entity ;
+  rdfs:range xsd:string ;
+  rdfs:label "version" ;
+  rdfs:comment "A version identifier for an entity, such as a dataset, software package or document." .
+
+rdip:projectStart a owl:DatatypeProperty ;
+  rdfs:domain rdip:ResearchProject ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "project start" ;
+  rdfs:comment "The date and time at which a research project started." .
+
+rdip:projectEnd a owl:DatatypeProperty ;
+  rdfs:domain rdip:ResearchProject ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "project end" ;
+  rdfs:comment "The date and time at which a research project ended or is expected to end." .
+
+#################################################################
+# MAPPINGS TO SCHEMA.ORG
+#################################################################
+
+### Class-level mappings
+
+vivo:Person a owl:Class ;
+    owl:equivalentClass schema:Person .
+
+vivo:Organization a owl:Class ;
+    owl:equivalentClass schema:Organization .
+
+dcat:Dataset a owl:Class ;
+    owl:equivalentClass schema:Dataset .
+
+bibo:Article a owl:Class ;
+    rdfs:subClassOf schema:ScholarlyArticle .
+
+rdip:ResearchActivity rdfs:subClassOf schema:Action .
+
+rdip:SoftwareApplication owl:equivalentClass schema:SoftwareApplication .
+
+rdip:Method
+    rdfs:subClassOf schema:CreativeWork ;
+    rdfs:seeAlso     schema:HowTo .
+
+### Property-level mappings
+
+rdip:identifier   rdfs:subPropertyOf schema:identifier .
+rdip:title        rdfs:subPropertyOf schema:name .
+rdip:description  rdfs:subPropertyOf schema:description .
+rdip:version      rdfs:subPropertyOf schema:version .
+
+rdip:landingPage  rdfs:subPropertyOf schema:url .
+rdip:accessLevel  rdfs:subPropertyOf schema:conditionsOfAccess .
+
+rdip:activityStart rdfs:subPropertyOf schema:startDate .
+rdip:activityEnd   rdfs:subPropertyOf schema:endDate .
+
+rdip:hasParticipant      rdfs:subPropertyOf schema:contributor .
+rdip:hasLeadOrganization rdfs:subPropertyOf schema:sponsor .
+
+rdip:projectStart rdfs:subPropertyOf schema:startDate .
+rdip:projectEnd   rdfs:subPropertyOf schema:endDate .

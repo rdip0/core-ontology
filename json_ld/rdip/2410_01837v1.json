@@ -1,0 +1,130 @@
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/Code-Survey",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Code-Survey: An LLM-Driven Methodology for Structuring and Analyzing Large-Scale Unstructured Software Engineering Data (Linux Kernel eBPF Case Study)"
+    },
+
+    {
+      "@id": "rdip:Dataset/Linux-eBPF-Commits-Raw",
+      "@type": "schema:Dataset",
+      "schema:name": "Raw Linux kernel eBPF-related commits (2017–2024)",
+      "schema:size": ">15,000 commits",
+      "schema:description": "Git commits filtered by eBPF-related keywords, containing commit ID, author, date, message, diff, and associated files"
+    },
+
+    {
+      "@id": "rdip:Activity/Survey-Design",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Design of structured Code-Survey questionnaire (7 main questions + I’m not sure options)",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Code-Survey-Questionnaire",
+        "@type": "schema:Dataset",
+        "schema:name": "Final eBPF commit survey with 7 structured questions (summary, keywords, classification, complexity, components, logic, use-cases)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Prompt-Engineering-LLM-Survey",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Construction of per-commit prompts containing survey + commit metadata + diff",
+      "prov:used": [
+        "rdip:Dataset/Linux-eBPF-Commits-Raw",
+        "rdip:Dataset/Code-Survey-Questionnaire"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Per-Commit-Prompts",
+        "@type": "schema:Dataset",
+        "schema:name": ">15,000 individualized prompts for GPT-4o"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/LLM-Survey-Execution",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Automated survey completion by GPT-4o (single pass per commit)",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/OpenAI-GPT-4o",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "OpenAI GPT-4o (via API or GPTs interface)",
+        "rdip:version": "2024-2025 release (gpt-4o)"
+      },
+      "prov:used": "rdip:Dataset/Per-Commit-Prompts",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/LLM-Survey-Responses-JSON",
+        "@type": "schema:Dataset",
+        "schema:name": "Structured JSON survey responses for >15,000 eBPF commits"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Data-Cleaning-Validation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Post-processing, cleaning, and manual validation of LLM responses (merge commits, unrelated commits, consistency checks)",
+      "prov:used": "rdip:Dataset/LLM-Survey-Responses-JSON",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/commit_survey.csv",
+        "@type": "schema:Dataset",
+        "schema:name": "Final cleaned commit_survey.csv dataset with structured fields (classification, complexity, components, etc.)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Quantitative-Analysis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Statistical and temporal analysis of structured survey data (time-series smoothing, distributions, trends)",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/Python-Pandas-Matplotlib",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "Python (Pandas, Matplotlib/Seaborn, SciPy for smoothing)",
+        "rdip:version": "unknown"
+      },
+      "prov:used": "rdip:Dataset/commit_survey.csv",
+      "rdip:outputDataset": [
+        {
+          "@id": "rdip:Dataset/Figures-2-17",
+          "@type": "schema:Dataset",
+          "schema:name": "All timeline, distribution, and dependency figures (Figures 2–17)"
+        },
+        {
+          "@id": "rdip:Dataset/Quantitative-Insights",
+          "@type": "schema:Dataset",
+          "schema:name": "Derived insights on bug distribution, component evolution, feature dependencies, libbpf lifecycle, etc."
+        }
+      ]
+    },
+
+    {
+      "@id": "rdip:Activity/Expert-Validation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Expert review and confirmation by >5 eBPF developers/maintainers and ongoing discussion on BPF mailing list",
+      "prov:used": [
+        "rdip:Dataset/commit_survey.csv",
+        "rdip:Dataset/Quantitative-Insights"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Expert-Feedback",
+        "@type": "schema:Dataset",
+        "schema:name": "Qualitative expert confirmation and planned rating of sampled responses"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Methodology-Refinement-Planning",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Planned future improvements (multi-run averaging, O1 model, multi-agent, refined prompts, expert rating of responses)",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Future-Work-Plan",
+        "@type": "schema:Dataset",
+        "schema:name": "Roadmap for enhancing Code-Survey accuracy and coverage"
+      }
+    }
+  ]
+}

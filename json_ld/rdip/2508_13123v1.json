@@ -1,0 +1,116 @@
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/HIV-Immune-Response-Reconstruction",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Parameter Identification of Time-Dependent Immune Response Coefficient E(t) in HIV Dynamical Model via Tikhonov Regularization and Adaptive Finite Elements"
+    },
+
+    {
+      "@id": "rdip:Dataset/HIV-Clinical-Data",
+      "@type": "schema:Dataset",
+      "schema:name": "Clinical HIV patient data (4 patients)",
+      "schema:description": "Time-series measurements of total T-cells (uninfected + infected) and virus load from Tables 2–3, interpolated to daily points"
+    },
+
+    {
+      "@id": "rdip:Activity/Data-Interpolation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Linear interpolation of sparse clinical measurements to daily time grid [0,363]",
+      "prov:used": "rdip:Dataset/HIV-Clinical-Data",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Interpolated-Clinical-Data",
+        "@type": "schema:Dataset",
+        "schema:name": "Daily interpolated g1(t) and g2(t) for 4 patients"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Theory-Development",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Derivation of Lagrangian, adjoint system, Fréchet derivative, and a posteriori error estimates for Tikhonov functional",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Mathematical-Framework",
+        "@type": "schema:Dataset",
+        "schema:name": "Equations (4.9)–(6.67): Optimality system, adjoint problem, gradient expression, error estimators"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Numerical-Discretization",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Finite-element (P0) + implicit Euler discretization of forward/adjoint problems + Newton solver",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Discretized-System",
+        "@type": "schema:Dataset",
+        "schema:name": "Piecewise-constant FEM spaces, Newton schemes (5.33) & (5.40)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/ACGA-Implementation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Implementation of Adaptive Conjugate Gradient Algorithm (ACGA) with residual-based mesh refinement",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/MATLAB-R2023b",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "MATLAB",
+        "rdip:version": "R2023b"
+      },
+      "prov:used": [
+        "rdip:Dataset/Interpolated-Clinical-Data",
+        "rdip:Dataset/Mathematical-Framework",
+        "rdip:Dataset/Discretized-System"
+      ],
+      "rdip:outputDataset": [
+        {
+          "@id": "rdip:Dataset/Reconstructed-E-functions",
+          "@type": "schema:Dataset",
+          "schema:name": "Reconstructed immune response E_k(t) on adaptively refined meshes for 4 patients"
+        },
+        {
+          "@id": "rdip:Dataset/Simulated-Trajectories",
+          "@type": "schema:Dataset",
+          "schema:name": "Forward solutions u1+u2, u3 matching clinical data after optimization"
+        },
+        {
+          "@id": "rdip:Dataset/Numerical-Figures",
+          "@type": "schema:Dataset",
+          "schema:name": "Figures 3–25: Reconstructions, virus dynamics, residuals, convergence plots"
+        }
+      ]
+    },
+
+    {
+      "@id": "rdip:Activity/CTL-Initial-Guess-Modeling",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Modeling of initial guess E0(t) and d(t) with cytotoxic T-lymphocyte (CTL) response (Eq. 8.74)",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Initial-Guess-E0",
+        "@type": "schema:Dataset",
+        "schema:name": "Patient-specific E0(t) with CTL burst parameters"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Validation-Error-Analysis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Computation of relative residuals R1, R2 and convergence monitoring on refined meshes",
+      "prov:used": [
+        "rdip:Dataset/Reconstructed-E-functions",
+        "rdip:Dataset/Simulated-Trajectories"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Validation-Metrics",
+        "@type": "schema:Dataset",
+        "schema:name": "Table 4 + Figures showing residuals, gradient norms, mesh refinement statistics"
+      }
+    }
+  ]
+}

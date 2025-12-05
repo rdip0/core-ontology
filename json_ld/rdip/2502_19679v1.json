@@ -1,0 +1,159 @@
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/LLM-Reliability-Survey-Interventions",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Evaluating LLM Annotation Reliability Using Survey-Methodology-Inspired Interventions and Information-Theoretic Scoring"
+    },
+
+    {
+      "@id": "rdip:Dataset/F1000-Expert-Annotations",
+      "@type": "schema:Dataset",
+      "schema:name": "F1000 (Faculty Opinions) expert-labeled biomedical papers",
+      "schema:size": 816,
+      "schema:description": "816 biomedical papers with expert-assigned contribution tags (Interesting Hypothesis 7.5%, Technical Advance 13.3%, New Finding 79%) after cleaning"
+    },
+
+    {
+      "@id": "rdip:Dataset/MAG-Citation-Data",
+      "@type": "schema:Dataset",
+      "schema:name": "Microsoft Academic Graph (MAG) citation counts merged with F1000 papers",
+      "schema:description": "Citation counts (within 3 years) for the 816 F1000 papers, matched via PMID → MAG PaperID, log(citations+1) transformed"
+    },
+
+    {
+      "@id": "rdip:Activity/Data-Merging-Cleaning",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Merging F1000 expert annotations with MAG citation data and preprocessing",
+      "prov:used": [
+        "rdip:Dataset/F1000-Expert-Annotations",
+        "rdip:Dataset/MAG-Citation-Data"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/F1000-MAG-Merged",
+        "@type": "schema:Dataset",
+        "schema:name": "Final analysis dataset of 816 papers with expert labels, citations, year, and team size"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/LLM-Inference-Setup",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Zero-shot/few-shot inference on LLaMA-3.1-Instruct 8B/70B/405B using TogetherAI API",
+      "rdip:usedSoftware": [
+        {
+          "@id": "rdip:Software/LLaMA-3.1-Instruct",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "LLaMA-3.1-Instruct (8B, 70B, 405B variants)",
+          "rdip:version": "2024 open-weight release"
+        },
+        {
+          "@id": "rdip:Software/TogetherAI-API",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "TogetherAI inference API",
+          "rdip:version": "2024–2025"
+        }
+      ],
+      "schema:description": "Inference parameters: temperature=0, top_p=0.7, logprobs=True, max_tokens=1",
+      "prov:used": "rdip:Dataset/F1000-MAG-Merged"
+    },
+
+    {
+      "@id": "rdip:Activity/Prompt-Design",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Design of base multiple-choice prompt template for contribution-type classification",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Base-Prompt-Template",
+        "@type": "schema:Dataset",
+        "schema:name": "Standard multiple-choice prompt with fixed option order A/B/C"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Survey-Interventions-Implementation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Systematic application of three survey-inspired prompt perturbations (Option Randomization, Position Randomization, Reverse Validation)",
+      "prov:used": "rdip:Dataset/Base-Prompt-Template",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Intervention-Perturbed-Prompts",
+        "@type": "schema:Dataset",
+        "schema:name": "6 perturbed prompt variants per paper (2 option orders × 3 position variants × reverse-coded)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/LLM-Intervention-Runs",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Execution of all intervention prompts on 816 papers across three LLaMA-3.1 models with logprobs",
+      "rdip:usedSoftware": "rdip:Software/TogetherAI-API",
+      "prov:used": [
+        "rdip:Dataset/F1000-MAG-Merged",
+        "rdip:Dataset/Intervention-Perturbed-Prompts"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/LLM-Intervention-Outputs",
+        "@type": "schema:Dataset",
+        "schema:name": "Raw token predictions and full logprob distributions for all intervention conditions"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Independent-Probability-Assessment",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Independent binary yes/no queries for each contribution category to eliminate causal attention bias",
+      "schema:description": "Three separate API calls per paper: 'Is the main contribution Technical Advance? Yes/No' etc.",
+      "rdip:usedSoftware": "rdip:Software/TogetherAI-API",
+      "prov:used": "rdip:Dataset/F1000-MAG-Merged",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Independent-Probabilities",
+        "@type": "schema:Dataset",
+        "schema:name": "Per-category p(Yes) probabilities for 816 papers × 3 categories × 3 models"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/R-Score-Computation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Computation of information-theoretic reliability score (R-score = D_KL(P || U)) with empirical thresholds",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/Python-NumPy-SciPy",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "Python (NumPy/SciPy for KL divergence)",
+        "rdip:version": "unknown"
+      },
+      "prov:used": "rdip:Dataset/Independent-Probabilities",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/R-Scores",
+        "@type": "schema:Dataset",
+        "schema:name": "Per-paper R-scores and reliability tiers (Very Low / Low / Moderate / High) for each model"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Downstream-Regression-Example",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Linear regression of log(citations+1) ~ predicted contribution type (expert vs. LLM labels) with controls",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/Python-statsmodels",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "Python statsmodels / scikit-learn",
+        "rdip:version": "unknown"
+      },
+      "prov:used": [
+        "rdip:Dataset/F1000-MAG-Merged",
+        "rdip:Dataset/LLM-Intervention-Outputs"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Regression-Results",
+        "@type": "schema:Dataset",
+        "schema:name": "Coefficients showing downstream impact of LLM vs. expert labels on citation prediction"
+      }
+    }
+  ]
+}

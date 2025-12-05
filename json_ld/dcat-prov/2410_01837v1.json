@@ -1,0 +1,58 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:CodeSurvey_Activity",
+      "@type": "prov:Activity",
+      "prov:generated": {
+        "@id": "_:eBPF_Commit_Survey_Dataset"
+      },
+      "prov:used": [
+        {"@id": "_:Linux_eBPF_Commits_Raw"},
+        {"@id": "_:Linux_Git_Repository"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:GPT4o_Agent"},
+        {"@id": "_:Human_Experts"}
+      ],
+      "rdfs:label": "Code-Survey methodology application: LLM-driven structured survey completion on >15,000 Linux eBPF subsystem commits"
+    },
+
+    {
+      "@id": "_:Linux_eBPF_Commits_Raw",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Raw Linux kernel Git commits (2017–2024) touching eBPF subsystem (commit messages, diffs, metadata; >15,000 commits)"
+    },
+
+    {
+      "@id": "_:Linux_Git_Repository",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Linux kernel Git repository source data used for commit extraction and filtering"
+    },
+
+    {
+      "@id": "_:eBPF_Commit_Survey_Dataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:CodeSurvey_Activity",
+      "prov:wasDerivedFrom": "_:Linux_eBPF_Commits_Raw",
+      "rdfs:label": "Structured eBPF commit survey dataset (commit_survey.csv) with LLM-generated fields: summary, keywords, commit type, complexity, implementation/logic components, use cases/events"
+    },
+
+    {
+      "@id": "_:GPT4o_Agent",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "OpenAI GPT-4o model used as LLM agent for survey design assistance and automated survey completion on eBPF commits"
+    },
+
+    {
+      "@id": "_:Human_Experts",
+      "@type": "prov:Agent",
+      "rdfs:label": "Human domain experts (eBPF maintainers and contributors) involved in survey design, validation, and result confirmation"
+    }
+  ]
+}

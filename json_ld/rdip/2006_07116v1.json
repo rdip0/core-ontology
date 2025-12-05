@@ -1,0 +1,141 @@
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/RNN-NAS-Benchmark",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Large-Scale Benchmark for Neural Architecture Search in Recurrent Language Modeling (2021)"
+    },
+
+    {
+      "@id": "rdip:Dataset/PTB",
+      "@type": "schema:Dataset",
+      "schema:name": "Penn Tree Bank (PTB)",
+      "schema:size": "1.086M tokens, vocab 10k"
+    },
+    {
+      "@id": "rdip:Dataset/WikiText-2",
+      "@type": "schema:Dataset",
+      "schema:name": "WikiText-2",
+      "schema:size": "2.552M tokens, vocab 33,278"
+    },
+
+    {
+      "@id": "rdip:Activity/Search-Space-Generation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Procedural generation of 14,322 attributed recurrent cell graphs (≤24 nodes, ≤3 hidden states, operations: Linear/Blending/Activations)",
+      "schema:description": "Random graph generation with constraints + manual addition of RNN/LSTM/GRU baselines",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/RNN-Cell-Search-Space",
+        "@type": "schema:Dataset",
+        "schema:size": "14,322 unique recurrent cell architectures (macro: AWD-LSTM)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Hyperparameter-Tuning",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Hyperparameter search on AWD-LSTM for hidden size, batch size, and dropout configurations",
+      "prov:used": "rdip:Dataset/PTB",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Fixed-Training-Config",
+        "@type": "schema:Dataset",
+        "schema:description": "nhid=600, batch_size=20, dropout=0.1, dropouth=0.25, dropouti=0.4, dropoute=0.0, wdrop=0.1"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Model-Training-PTB",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Training of 14,322 RNN architectures on PTB (4114 ×3 seeds, rest ×1)",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/PyTorch-AWD-LSTM",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "AWD-LSTM PyTorch implementation",
+        "rdip:version": "Merity et al. repository"
+      },
+      "prov:used": [
+        "rdip:Dataset/PTB",
+        "rdip:Dataset/RNN-Cell-Search-Space",
+        "rdip:Dataset/Fixed-Training-Config"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PTB-Training-Logs",
+        "@type": "schema:Dataset",
+        "schema:description": "Per-epoch train/val/test log-perplexity, wall time, final parameters for 14,322 models"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Stratified-Training-WikiText2",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Training of 289 stratified models on WikiText-2 based on PTB performance",
+      "prov:used": [
+        "rdip:Dataset/WikiText-2",
+        "rdip:Dataset/PTB-Training-Logs"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/WikiText2-Training-Logs",
+        "@type": "schema:Dataset"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Graph-Embedding",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Architecture embedding via graph2vec (10D and 50D)",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/graph2vec",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "graph2vec"
+      },
+      "prov:used": "rdip:Dataset/RNN-Cell-Search-Space",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Architecture-Embeddings",
+        "@type": "schema:Dataset",
+        "schema:size": "14,322 × (10D + 50D)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Benchmark-Environment",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Creation of NAS simulation environment with precomputed training trajectories",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/RNN-NAS-Benchmark",
+        "@type": "schema:Dataset",
+        "schema:name": "Public RNN NAS benchmark with 14,322 pre-trained models, logs, and evaluation API"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/NAS-Algorithm-Evaluation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Benchmarking of Random Search, Hyperband, BO (graph2vec), RE, TPE, SMAC (30 trials each)",
+      "prov:used": "rdip:Dataset/RNN-NAS-Benchmark",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/NAS-Algorithm-Results",
+        "@type": "schema:Dataset",
+        "schema:name": "Regret vs. wall-time curves (Figure 10)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Word-Embedding-Evaluation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Intrinsic evaluation on WordSim-353 and SimLex-999 + extrinsic on GLUE (stratified sample)",
+      "prov:used": "rdip:Dataset/PTB-Training-Logs",
+      "prov:used": "rdip:Dataset/WikiText2-Training-Logs",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Embedding-Eval-Results",
+        "@type": "schema:Dataset",
+        "schema:name": "Figures 9 + GLUE scores"
+      }
+    }
+  ]
+}

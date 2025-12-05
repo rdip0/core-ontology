@@ -1,0 +1,128 @@
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/SurveyTheory-ML-Labeling",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Applying Survey Methodology and Cognitive Response Theories to Improve Quality and Transparency of Machine-Learning Training Data Labels"
+    },
+
+    {
+      "@id": "rdip:Dataset/Survey-Literature-Corpus",
+      "@type": "schema:Dataset",
+      "schema:name": "Corpus of survey methodology literature on cognitive response processes, satisficing, context effects, selection bias, and data-quality practices",
+      "schema:description": "Includes key works by Tourangeau et al. (2000, 2018), Krosnick (1991), Galesic et al. (2008), Smyth (2006), Kreuter et al., and AAPOR Transparency Initiative references"
+    },
+
+    {
+      "@id": "rdip:Dataset/ML-Labeling-Literature-Corpus",
+      "@type": "schema:Dataset",
+      "schema:name": "Corpus of ML/data-labeling studies cited as evidence or counterexamples",
+      "schema:description": "Includes Kern et al. (2023), Beck et al. (2022, 2024), Bassignana & Plank (2022), Al Kuwatly et al. (2020), Sap et al. (2022), Parrish et al. (2024), Ouyang et al. (2022), etc."
+    },
+
+    {
+      "@id": "rdip:Activity/Theory-Synthesis-Response-Process",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Synthesis of Tourangeau’s four-stage cognitive response process model and deviations (satisficing, acquiescence, straight-lining, motivated misreporting)",
+      "prov:used": "rdip:Dataset/Survey-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Response-Process-Model-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Adapted cognitive response process model for survey answering"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Context-Effects-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review and synthesis of context and order effects literature (contrast/assimilation, priming, order effects in surveys)",
+      "prov:used": "rdip:Dataset/Survey-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Context-Effects-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Summary of context and order effects applicable to labeling tasks"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Hypothesis-Derivation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Derivation of testable hypotheses about labeling quality from survey theory (wording/reading level, multiple labels format, order effects, pre-labeling/anchoring, don’t-know options, overreliance on examples)",
+      "prov:used": [
+        "rdip:Dataset/Response-Process-Model-Summary",
+        "rdip:Dataset/Context-Effects-Summary",
+        "rdip:Dataset/ML-Labeling-Literature-Corpus"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Label-Quality-Hypotheses",
+        "@type": "schema:Dataset",
+        "schema:name": "Set of hypotheses linking survey-theory constructs to ML labeling quality"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Selection-Bias-Framework-Adaptation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Adaptation of survey nonresponse/selection-bias framework (Groves 2006) to ML labeler recruitment and label assignment",
+      "prov:used": "rdip:Dataset/Survey-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Selection-Bias-ML-Framework",
+        "@type": "schema:Dataset",
+        "schema:name": "Causal diagram (Figure 4) and theoretical argument for selection bias in training labels"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Mitigation-Measures-Synthesis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Synthesis of mitigation strategies from survey methodology (randomization, cognitive interviewing, paradata, feedback prompts, test observations, weighting) and their proposed application to ML labeling",
+      "prov:used": [
+        "rdip:Dataset/Survey-Literature-Corpus",
+        "rdip:Dataset/Label-Quality-Hypotheses"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Mitigation-Recommendations",
+        "@type": "schema:Dataset",
+        "schema:name": "List of practical mitigation measures and transparency recommendations for ML label collection"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Transparency-Advocacy",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Argument for mandatory detailed documentation of labeling instruments, prompts, examples, labeler demographics, and process (modeled on AAPOR Transparency Initiative)",
+      "prov:used": [
+        "rdip:Dataset/Survey-Literature-Corpus",
+        "rdip:Dataset/ML-Labeling-Literature-Corpus"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Transparency-Call",
+        "@type": "schema:Dataset",
+        "schema:name": "Call for standardized reporting of label-collection provenance in ML papers and datasets"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Final-Integration",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Integration of all theoretical syntheses, hypothesis derivation, and recommendations into final methodology/theory section",
+      "prov:used": [
+        "rdip:Dataset/Label-Quality-Hypotheses",
+        "rdip:Dataset/Selection-Bias-ML-Framework",
+        "rdip:Dataset/Mitigation-Recommendations",
+        "rdip:Dataset/Transparency-Call"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Final-Methodology-Section",
+        "@type": "schema:Dataset",
+        "schema:name": "Published 'Science of Data Collection' methodology section applying survey theory to ML labeling"
+      }
+    }
+  ]
+}

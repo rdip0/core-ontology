@@ -1,0 +1,78 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:LabelCollectionReview_Activity",
+      "@type": "prov:Activity",
+      "prov:used": [
+        {"@id": "_:Crowdworker_Labels_Dataset"},
+        {"@id": "_:Survey_Response_Datasets"},
+        {"@id": "_:HateSpeech_Tweet_Labels"},
+        {"@id": "_:Wikipedia_Attack_Labels"},
+        {"@id": "_:InstructGPT_RLHF_Labels"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:Crowdworker_Agents"},
+        {"@id": "_:Survey_Respondents"},
+        {"@id": "_:Labeling_Platforms"}
+      ],
+      "rdfs:label": "Theoretical review and hypothesis derivation linking survey response theory to machine learning data labeling quality (including order effects, satisficing, selection bias, and mitigation strategies)"
+    },
+
+    {
+      "@id": "_:Crowdworker_Labels_Dataset",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Labels produced by crowdworkers on platforms (e.g., MTurk, Prolific, Appen, Scale AI, Upwork) for NLP/ML tasks including hate speech, toxicity, RLHF preference data, image labeling, and annotation benchmarks"
+    },
+
+    {
+      "@id": "_:Survey_Response_Datasets",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Survey response datasets used as empirical evidence or analogy (including victimization surveys, health insurance surveys, political opinion surveys, cognitive interviewing pretest data, paradata-enabled surveys)"
+    },
+
+    {
+      "@id": "_:HateSpeech_Tweet_Labels",
+      "@type": "dcat:Dataset",
+      "prov:wasDerivedFrom": "_:Crowdworker_Labels_Dataset",
+      "rdfs:label": "Experimental hate speech/offensive language tweet labeling datasets from Kern et al. (2023) and Beck et al. (2024) with manipulated instrument design (single-screen vs multi-screen, order effects)"
+    },
+
+    {
+      "@id": "_:Wikipedia_Attack_Labels",
+      "@type": "dcat:Dataset",
+      "prov:wasDerivedFrom": "_:Crowdworker_Labels_Dataset",
+      "rdfs:label": "Wikipedia comment attack/toxicity labels showing annotator demographic effects (Al Kuwatly et al., 2020)"
+    },
+
+    {
+      "@id": "_:InstructGPT_RLHF_Labels",
+      "@type": "dcat:Dataset",
+      "prov:wasDerivedFrom": "_:Crowdworker_Labels_Dataset",
+      "rdfs:label": "Reinforcement Learning from Human Feedback (RLHF) preference and ranking labels used to fine-tune InstructGPT / GPT-4 series models (Ouyang et al., 2022; Glaese et al., 2022; Bai et al., 2022)"
+    },
+
+    {
+      "@id": "_:Crowdworker_Agents",
+      "@type": "prov:Agent",
+      "rdfs:label": "Crowdworkers (predominantly from Global South, younger, lower-income, non-representative of end-user populations) acting as human labelers on commercial platforms"
+    },
+
+    {
+      "@id": "_:Survey_Respondents",
+      "@type": "prov:Agent",
+      "rdfs:label": "General population survey respondents (probability and non-probability samples) whose cognitive and behavioral response processes are used as theoretical foundation"
+    },
+
+    {
+      "@id": "_:Labeling_Platforms",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Crowdsourcing and annotation platforms (Amazon Mechanical Turk, Prolific, Appen, Scale AI, Upwork, custom labeling interfaces) used to collect training labels"
+    }
+  ]
+}

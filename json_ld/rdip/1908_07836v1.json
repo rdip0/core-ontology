@@ -1,0 +1,133 @@
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/PubLayNet",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "PubLayNet: Large-Scale Automatic Annotation of Document Layout in PubMed Central Open Access Subset (Xu et al., 2020)"
+    },
+
+    {
+      "@id": "rdip:Dataset/PMCOA-XML-PDF-2018",
+      "@type": "schema:Dataset",
+      "schema:name": "PubMed Central Open Access Subset (downloaded 2018-10-03)",
+      "schema:size": "1,162,856 articles with complete XML + PDF",
+      "schema:description": "Articles provided under Creative Commons, containing both PDF and NLM-JATS XML representations"
+    },
+
+    {
+      "@id": "rdip:Activity/XML-Preprocessing",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "XML cleaning and standardization (remove math/formula nodes, move list/table/figure to floats-group)",
+      "prov:used": "rdip:Dataset/PMCOA-XML-PDF-2018",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PMCOA-XML-Cleaned",
+        "@type": "schema:Dataset",
+        "schema:name": "Standardized NLM-JATS XML trees"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/PDF-Parsing",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "PDF parsing with PDFMiner to extract textboxes, textlines, images, geometric shapes",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/PDFMiner",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "PDFMiner",
+        "rdip:version": "2018-era"
+      },
+      "prov:used": "rdip:Dataset/PMCOA-XML-PDF-2018",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PMCOA-PDF-Layout-Elements",
+        "@type": "schema:Dataset",
+        "schema:name": "Raw PDF layout primitives (textboxes, images, shapes) with bounding boxes"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/String-Normalization",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Unicode KD normalization of all strings from XML and PDF",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Normalized-Strings",
+        "@type": "schema:Dataset"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/PDF-XML-Matching",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Fuzzy string matching (Levenshtein via fuzzysearch) + adaptive distance threshold + sequential textline matching",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/fuzzysearch",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "fuzzysearch Python package"
+      },
+      "prov:used": [
+        "rdip:Dataset/PMCOA-XML-Cleaned",
+        "rdip:Dataset/PMCOA-PDF-Layout-Elements",
+        "rdip:Dataset/Normalized-Strings"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Matched-Layout-Elements",
+        "@type": "schema:Dataset",
+        "schema:name": "PDF elements matched to XML nodes with preliminary category labels"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Figure-Table-Body-Annotation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Margin-based annotation of figure/table bodies using main-text box and caption position",
+      "prov:used": "rdip:Dataset/Matched-Layout-Elements",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Figure-Table-Bodies",
+        "@type": "schema:Dataset"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Segmentation-Generation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Polygon segmentation generation from textlines (horizontal/vertical edges only) + reuse bbox for figures/tables",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PubLayNet-Segmentations",
+        "@type": "schema:Dataset"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Quality-Control-Filtering",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Annotation quality filtering (>99% coverage for non-title pages, >90% for title pages) + manual curation of dev/test",
+      "prov:used": [
+        "rdip:Dataset/Matched-Layout-Elements",
+        "rdip:Dataset/Figure-Table-Bodies",
+        "rdip:Dataset/PubLayNet-Segmentations"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PubLayNet-Final",
+        "@type": "schema:Dataset",
+        "schema:name": "PubLayNet dataset",
+        "schema:size": "Training: 340,391 pages; Dev: 11,858 pages; Test: 11,983 pages (5 categories: Text, Title, List, Table, Figure)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Train-Dev-Test-Split",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Journal-level stratified split + balanced sampling per category + manual curation of dev/test",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/PubLayNet-Partitions",
+        "@type": "schema:Dataset",
+        "schema:name": "Official PubLayNet train/val/test splits (Table II)"
+      }
+    }
+  ]
+}

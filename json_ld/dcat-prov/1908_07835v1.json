@@ -1,0 +1,68 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:PubLayNet_Construction_Activity",
+      "@type": "prov:Activity",
+      "prov:generated": {
+        "@id": "_:PubLayNet_Dataset"
+      },
+      "prov:used": [
+        {"@id": "_:PMCOA_XML_Collection"},
+        {"@id": "_:PMCOA_PDF_Collection"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:PDFMiner_Software"},
+        {"@id": "_:FuzzySearch_Software"},
+        {"@id": "_:Custom_Annotation_Pipeline"}
+      ],
+      "rdfs:label": "Automatic construction of PubLayNet document layout annotation dataset by PDF-XML alignment on PubMed Central Open Access subset"
+    },
+
+    {
+      "@id": "_:PMCOA_XML_Collection",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "PubMed Central Open Access XML articles (NLM-JATS schema, 1,162,856 complete articles downloaded 2018-10-03)"
+    },
+
+    {
+      "@id": "_:PMCOA_PDF_Collection",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Corresponding PDF versions of 1,162,856 PMCOA articles"
+    },
+
+    {
+      "@id": "_:PubLayNet_Dataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:PubLayNet_Construction_Activity",
+      "prov:wasDerivedFrom": [
+        "_:PMCOA_XML_Collection",
+        "_:PMCOA_PDF_Collection"
+      ],
+      "rdfs:label": "PubLayNet document layout dataset (335k+ pages annotated with Text, Title, List, Table, Figure categories; train/val/test splits with manual curation of val/test)"
+    },
+
+    {
+      "@id": "_:PDFMiner_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "PDFMiner (Python) used for low-level PDF layout parsing (textboxes, textlines, images, geometric shapes)"
+    },
+
+    {
+      "@id": "_:FuzzySearch_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "fuzzysearch Python package (Levenshtein-distance fuzzy string matching) for robust PDF-text to XML-text alignment"
+    },
+
+    {
+      "@id": "_:Custom_Annotation_Pipeline",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Custom Python annotation pipeline (XML preprocessing, node grouping, adaptive-threshold fuzzy matching, margin-based figure/table body detection, polygon segmentation generation, quality-control filtering ≥99% coverage)"
+    }
+  ]
+}

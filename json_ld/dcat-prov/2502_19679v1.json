@@ -1,0 +1,82 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:LLM_Annotation_Experiment",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:F1000_LLM_Annotations"},
+        {"@id": "_:F1000_R_Score_Dataset"}
+      ],
+      "prov:used": [
+        {"@id": "_:F1000_Expert_Dataset"},
+        {"@id": "_:MAG_Citation_Dataset"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:LLaMA3_1_8B"},
+        {"@id": "_:LLaMA3_1_70B"},
+        {"@id": "_:LLaMA3_1_405B"},
+        {"@id": "_:TogetherAI_API"}
+      ],
+      "rdfs:label": "Experiment applying survey-inspired interventions and independent probability assessment to evaluate reliability of LLaMA-3.1 models annotating biomedical paper contribution types (F1000 dataset)"
+    },
+
+    {
+      "@id": "_:F1000_Expert_Dataset",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "F1000 (Faculty Opinions) expert-annotated biomedical papers (n=816 after cleaning) with contribution type labels: Interesting Hypothesis, Technical Advance, New Finding",
+      "dcat:keyword": ["biomedical literature", "expert annotation", "contribution type"]
+    },
+
+    {
+      "@id": "_:MAG_Citation_Dataset",
+      "@type": "d  cat:Dataset",
+      "rdfs:label": "Microsoft Academic Graph (MAG) citation counts merged with F1000 papers via PMID-to-MAG ID matching (3-year forward citations, log-transformed)"
+    },
+
+    {
+      "@id": "_:F1000_LLM_Annotations",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:LLM_Annotation_Experiment",
+      "prov:wasDerivedFrom": "_:F1000_Expert_Dataset",
+      "rdfs:label": "LLM-generated contribution type annotations on 816 F1000 papers under multiple prompting conditions (original, option randomization, position randomization, reverse validation)"
+    },
+
+    {
+      "@id": "_:F1000_R_Score_Dataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:LLM_Annotation_Experiment",
+      "prov:wasDerivedFrom": "_:F1000_Expert_Dataset",
+      "rdfs:label": "Per-paper R-scores (KL-divergence from uniform) computed via independent binary queries to LLaMA-3.1 models on the F1000 dataset"
+    },
+
+    {
+      "@id": "_:LLaMA3_1_8B",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "LLaMA-3.1-Instruct 8B parameter model (Meta AI)"
+    },
+
+    {
+      "@id": "_:LLaMA3_1_70B",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "LLaMA-3.1-Instruct 70B parameter model (Meta AI)"
+    },
+
+    {
+      "@id": "_:LLaMA3_1_405B",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "LLaMA-3.1-Instruct 405B parameter model (Meta AI)"
+    },
+
+    {
+      "@id": "_:TogetherAI_API",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "TogetherAI inference API used for controlled generation (temperature=0, top-p=0.7) and extraction of logprobs"
+    }
+  ]
+}

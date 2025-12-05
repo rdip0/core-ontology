@@ -1,0 +1,100 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "https://doi.org/10.31235/osf.io/XXXX", 
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:PP_CodedDataset"},
+        {"@id": "_:Congress_CodedDataset"},
+        {"@id": "_:NYT_CodedDataset"},
+        {"@id": "_:TGP_CodedDataset"}
+      ],
+      "prov:used": [
+        {"@id": "_:PP_RawTexts"},
+        {"@id": "_:Congress_RawSummaries"},
+        {"@id": "_:NYT_RawHeadlines"},
+        {"@id": "_:TGP_RawStatements"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:GPT3_TextDavinci"},
+        {"@id": "_:HumanCoders"},
+        {"@id": "_:SVC_SupervisedModel"}
+      ],
+      "rdfs:label": "Coding experiments using GPT-3 on four social-science text classification tasks (Rytting et al.)"
+    },
+    {
+      "@id": "_:GPT3_TextDavinci",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "OpenAI GPT-3 (text-davinci family) used in few-shot prompted mode with 2–4 exemplars"
+    },
+    {
+      "@id": "_:HumanCoders",
+      "@type": "prov:Agent",
+      "rdfs:label": "Human coders (lightly trained for PP/NYT/Congress, intensively trained for TGP)"
+    },
+    {
+      "@id": "_:SVC_SupervisedModel",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Bag-of-words Support Vector Classifier (SVC) trained on 3,000 labeled examples (used only on TGP)"
+    },
+
+    {
+      "@id": "_:PP_RawTexts",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Pigeonholing Partisans (PP) raw open-ended descriptions of partisans (7,675 texts from Rothschild et al. 2019 and related work)"
+    },
+    {
+      "@id": "_:PP_CodedDataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": {"@id": "https://doi.org/10.31235/osf.io/XXXX"},
+      "prov:wasDerivedFrom": "_:PP_RawTexts",
+      "rdfs:label": "PP dataset with human and GPT-3 codes on five dimensions (positivity, extremity, traits, issues, groups)"
+    },
+
+    {
+      "@id": "_:Congress_RawSummaries",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Congressional Hearing summaries (1946–2010) from Comparative Agendas Project"
+    },
+    {
+      "@id": "_:Congress_CodedDataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": {"@id": "https://doi.org/10.31235/osf.io/XXXX"},
+      "prov:wasDerivedFrom": "_:Congress_RawSummaries",
+      "rdfs:label": "CAP-coded Congressional hearing summaries (n=326 re-coded texts) with codes from 3 humans + GPT-3"
+    },
+
+    {
+      "@id": "_:NYT_RawHeadlines",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "New York Times front-page headlines 1996–2006 (Boydstun 2013)"
+    },
+    {
+      "@id": "_:NYT_CodedDataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": {"@id": "https://doi.org/10.31235/osf.io/XXXX"},
+      "prov:wasDerivedFrom": "_:NYT_RawHeadlines",
+      "rdfs:label": "NYT headline CAP codes (n=560 sampled headlines) with codes from 4 humans + GPT-3 (headline-only)"
+    },
+
+    {
+      "@id": "_:TGP_RawStatements",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "The Guardian Populism survey open-ended responses on responsibility for political problems (≈20,000 responses, 4,000 human-coded)"
+    },
+    {
+      "@id": "_:TGP_CodedDataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": {"@id": "https://doi.org/10.31235/osf.io/XXXX"},
+      "prov:wasDerivedFrom": "_:TGP_RawStatements",
+      "rdfs:label": "TGP populism binary codes (presence/absence) from 2 intensively trained humans, GPT-3 (few-shot), and SVC (supervised baseline)"
+    }
+  ]
+}

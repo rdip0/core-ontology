@@ -1,0 +1,94 @@
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/Biomedical-KG-Review-2024",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Comprehensive Review of Biomedical Knowledge Graphs: Methods, Applications, and Future Directions"
+    },
+
+    {
+      "@id": "rdip:Dataset/BKG-Literature-Corpus",
+      "@type": "schema:Dataset",
+      "schema:name": "Corpus of >180 publications on biomedical knowledge graphs (2015–2024)",
+      "schema:description": "Includes works on rule-based inference, probabilistic inference, KGC (TransE/TransH/RESCAL/DistMult/ComplEx/GNNs), logical explanation, assisted interpretation (LLM+RAG), and applications in information retrieval, CDS, QA, drug discovery, and scientific research"
+    },
+
+    {
+      "@id": "rdip:Activity/Literature-Collection-Search",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Systematic search and collection of biomedical KG literature across databases (PubMed, arXiv, Google Scholar, etc.)",
+      "rdip:outputDataset": "rdip:Dataset/BKG-Literature-Corpus"
+    },
+
+    {
+      "@id": "rdip:Activity/Inference-Methods-Taxonomy",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Taxonomic synthesis of KG inference methods (rule-based, probabilistic, prediction via rule-based and embedding-based)",
+      "prov:used": "rdip:Dataset/BKG-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Inference-Taxonomy",
+        "@type": "schema:Dataset",
+        "schema:name": "Hierarchical classification of inference techniques in BKGs"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Embedding-Techniques-Classification",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Classification of KGE models into translational (TransE/TransH/TransR), semantic matching (RESCAL/DistMult/ComplEx), and GNN-based approaches",
+      "prov:used": "rdip:Dataset/BKG-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/KGE-Classification",
+        "@type": "schema:Dataset",
+        "schema:name": "Sub-taxonomy of knowledge graph embedding methods used in biomedicine"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Interpretation-Methods-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review and dichotomy of knowledge interpretation methods (logical explanation via paths/subgraphs vs. assisted interpretation via LLMs/RAG)",
+      "prov:used": "rdip:Dataset/BKG-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Interpretation-Taxonomy",
+        "@type": "schema:Dataset",
+        "schema:name": "Logical vs. assisted (LLM-augmented) explanation approaches in BKGs"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Application-Domains-Mapping",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Mapping of BKG applications to five major domains: Information Retrieval, Clinical Decision Support, Intelligent QA, Drug Discovery, Scientific Research",
+      "prov:used": "rdip:Dataset/BKG-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/BKG-Applications-Framework",
+        "@type": "schema:Dataset",
+        "schema:name": "Figure 4 – Comprehensive application framework of biomedical knowledge graphs"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Narrative-Synthesis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Narrative integration of inference, interpretation, and application findings into review manuscript section",
+      "prov:used": [
+        "rdip:Dataset/Inference-Taxonomy",
+        "rdip:Dataset/KGE-Classification",
+        "rdip:Dataset/Interpretation-Taxonomy",
+        "rdip:Dataset/BKG-Applications-Framework"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Final-Review-Section",
+        "@type": "schema:Dataset",
+        "schema:name": "Published methodology/review section on biomedical knowledge graph techniques and applications"
+      }
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/GPT3-SocialScience-Coding",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Towards Coding Social Science Datasets with Language Models (Rytting et al.)"
+    },
+
+    {
+      "@id": "rdip:Dataset/PigeonholingPartisans",
+      "@type": "schema:Dataset",
+      "schema:name": "Pigeonholing Partisans (PP) – 7,675 open-ended descriptions of Democrats/Republicans (Rothschild et al. 2019 + synthetic)",
+      "schema:size": 7675
+    },
+    {
+      "@id": "rdip:Dataset/CongressionalHearings-CAP",
+      "@type": "schema:Dataset",
+      "schema:name": "CAP-coded U.S. Congressional hearing summaries (1946–2010)",
+      "schema:size": ">10,000 summaries (subset n=326 used for intercoder comparison)"
+    },
+    {
+      "@id": "rdip:Dataset/NYT-FrontPage-CAP",
+      "@type": "schema:Dataset",
+      "schema:name": "New York Times Front Page headlines 1996–2006 (Boydstun 2013)",
+      "schema:size": 31034,
+      "schema:description": "28 CAP media categories; random subsample n=560 used for intercoder study"
+    },
+    {
+      "@id": "rdip:Dataset/GuardianPopulism",
+      "@type": "schema:Dataset",
+      "schema:name": "The Guardian Populism survey responses (2018)",
+      "schema:size": ">20,000 responses; 4,000 coded by highly-trained humans; random subset n=1,300 used for GPT-3 comparison"
+    },
+
+    {
+      "@id": "rdip:Activity/HumanCoding-AllDatasets",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Human coding of texts across four datasets (lightly-trained for PP/NYT/Congress, intensively-trained for Guardian Populism)",
+      "prov:generated": [
+        "rdip:Dataset/PigeonholingPartisans-HumanCodes",
+        "rdip:Dataset/CongressionalHearings-HumanCodes",
+        "rdip:Dataset/NYT-FrontPage-HumanCodes",
+        "rdip:Dataset/GuardianPopulism-HumanCodes"
+      ]
+    },
+
+    {
+      "@id": "rdip:Activity/GPT3-PromptEngineering",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Design of few-shot prompts (2–4 exemplars) for each coding task",
+      "prov:generated": "rdip:Dataset/GPT3-Prompts"
+    },
+
+    {
+      "@id": "rdip:Activity/GPT3-Coding-AllDatasets",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Zero/few-shot coding of all four datasets using GPT-3 (text-davinci-002/003 era)",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/OpenAI-GPT3",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "OpenAI GPT-3 (text-davinci series)",
+        "rdip:version": "not specified (2022-era commercial API)"
+      },
+      "prov:used": [
+        "rdip:Dataset/PigeonholingPartisans",
+        "rdip:Dataset/CongressionalHearings-CAP",
+        "rdip:Dataset/NYT-FrontPage-CAP",
+        "rdip:Dataset/GuardianPopulism",
+        "rdip:Dataset/GPT3-Prompts"
+      ],
+      "rdip:outputDataset": [
+        {
+          "@id": "rdip:Dataset/PigeonholingPartisans-GPT3Codes",
+          "@type": "schema:Dataset",
+          "schema:name": "GPT-3 codes for 7,675 PP descriptions (5 dimensions)"
+        },
+        {
+          "@id": "rdip:Dataset/CongressionalHearings-GPT3Codes",
+          "@type": "schema:Dataset",
+          "schema:name": "GPT-3 CAP codes for congressional hearing summaries"
+        },
+        {
+          "@id": "rdip:Dataset/NYT-FrontPage-GPT3Codes",
+          "@type": "schema:Dataset",
+          "schema:name": "GPT-3 CAP codes for 560 NYT headlines"
+        },
+        {
+          "@id": "rdip:Dataset/GuardianPopulism-GPT3Codes",
+          "@type": "schema:Dataset",
+          "schema:name": "GPT-3 binary populism codes for 1,300 Guardian responses"
+        }
+      ]
+    },
+
+    {
+      "@id": "rdip:Activity/CAP-ProbabilityCalibration",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Post-hoc calibration of GPT-3 token probabilities using balanced validation set (Zhao et al. 2021-style bias normalization)",
+      "prov:used": "rdip:Dataset/CongressionalHearings-GPT3Codes",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/CustomPython",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "Custom Python post-processing scripts",
+        "rdip:version": "unknown"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/SML-Baseline-Guardian",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Training and application of bag-of-words Support Vector Classifier (SVC) baseline on Guardian Populism data",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/scikit-learn-SVC",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "scikit-learn SVC (bag-of-words)",
+        "rdip:version": "unknown"
+      },
+      "prov:used": "rdip:Dataset/GuardianPopulism-HumanCodes",
+      "rdip:outputDataset": "rdip:Dataset/GuardianPopulism-SMLCodes"
+    },
+
+    {
+      "@id": "rdip:Activity/IntercoderAgreement-Analysis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Computation of intercoder reliability metrics (ICC1k, ICC3k, Fleiss’ kappa, joint probability of agreement) and accuracy comparisons",
+      "rdip:usedSoftware": [
+        {
+          "@id": "rdip:Software/R-or-Python-stats",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "R / Python (irr, psych, or sklearn.metrics packages implied)",
+          "rdip:version": "unknown"
+        }
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/IntercoderMetrics-Results",
+        "@type": "schema:Dataset",
+        "schema:name": "Tables and figures of agreement statistics across all four applications"
+      }
+    }
+  ]
+}

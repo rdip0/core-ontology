@@ -1,0 +1,148 @@
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/ALIGN",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "ALIGN: Scaling Up Visual and Vision-Language Representation Learning With Noisy Text Supervision (Jia et al., 2021)"
+    },
+
+    {
+      "@id": "rdip:Activity/Web-AltText-Crawling",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Web-scale crawling of raw English alt-text image-text pairs (following Conceptual Captions pipeline)"
+    },
+
+    {
+      "@id": "rdip:Activity/Minimal-Cleaning-Filtering",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Minimal cleaning of raw alt-text data (image-based + text-based frequency filtering only)",
+      "schema:description": "Image filters: remove porn, shorter side >200px, aspect<3, >1000 alt-texts; remove near-duplicates of downstream test sets. Text filters: shared by ≤10 images, vocab ≤100M most frequent tokens, 3≤unigrams≤20",
+      "prov:used": "rdip:Dataset/Raw-Web-AltText",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ALIGN-1.8B",
+        "@type": "schema:Dataset",
+        "schema:name": "ALIGN pre-training dataset",
+        "schema:size": "1.8 billion noisy image-text pairs"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/ALIGN-Pretraining-English",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Pre-training of ALIGN dual-encoder (EfficientNet-L2 + BERT-Large) on 1.8B noisy English image-text pairs",
+      "rdip:usedSoftware": [
+        {
+          "@id": "rdip:Software/EfficientNet",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "EfficientNet (open-source implementation)",
+          "rdip:version": "Tan & Le, 2019"
+        },
+        {
+          "@id": "rdip:Software/BERT",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "BERT",
+          "rdip:version": "Devlin et al., 2019"
+        },
+        {
+          "@id": "rdip:Software/JAX-TPU",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "JAX + Cloud TPU v3",
+          "rdip:version": "2020-2021"
+        }
+      ],
+      "schema:description": "Normalized softmax (in-batch negatives), LAMB optimizer, 16,384 batch size, 1.2M steps, learnable temperature, trained from scratch",
+      "prov:used": "rdip:Dataset/ALIGN-1.8B",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ALIGN-English-Model",
+        "@type": "schema:Dataset",
+        "schema:name": "Pre-trained ALIGN model (EfficientNet-L2 image + BERT-Large text encoders)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Multilingual-Extension",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Construction of 1.8B multilingual (100+ languages) image-text dataset + training of ALIGNmling",
+      "prov:used": "rdip:Activity/Web-AltText-Crawling",
+      "prov:used": "rdip:Activity/Minimal-Cleaning-Filtering",
+      "rdip:outputDataset": [
+        {
+          "@id": "rdip:Dataset/ALIGN-Multilingual-1.8B",
+          "@type": "schema:Dataset",
+          "schema:name": "Multilingual ALIGN training data (1.8B pairs, 100+ languages)"
+        },
+        {
+          "@id": "rdip:Dataset/ALIGN-Multilingual-Model",
+          "@type": "schema:Dataset",
+          "schema:name": "ALIGNmling model (250k multilingual wordpiece vocabulary)"
+        }
+      ]
+    },
+
+    {
+      "@id": "rdip:Activity/ZeroShot-Transfer",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Zero-shot evaluation on image-text retrieval (Flickr30K, MSCOCO, CxC) and image classification (ImageNet + variants)",
+      "prov:used": "rdip:Dataset/ALIGN-English-Model",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ZeroShot-Results",
+        "@type": "schema:Dataset",
+        "schema:name": "Zero-shot R@1/5/10 on retrieval + top-1 accuracy on ImageNet/ImageNet-R/A/V2"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/FineTuning-Retrieval",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Fine-tuning of ALIGN on Flickr30K and MSCOCO training sets",
+      "prov:used": "rdip:Dataset/ALIGN-English-Model",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ALIGN-FineTuned-Retrieval",
+        "@type": "schema:Dataset",
+        "schema:name": "Fine-tuned ALIGN models for Flickr30K and MSCOCO"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/FineTuning-Classification",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Linear probe and full fine-tuning of ALIGN image encoder on ImageNet, VTAB, and fine-grained classification datasets",
+      "prov:used": "rdip:Dataset/ALIGN-English-Model",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ALIGN-Image-Classification-Models",
+        "@type": "schema:Dataset",
+        "schema:name": "Fine-tuned image classifiers (frozen features + full fine-tune) on ImageNet, VTAB (19 tasks), Flowers-102, Pets, Cars, Food101"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Ablation-Experiments",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Ablation studies on model size, embedding dim, temperature, in-batch negatives, and dataset scale/noise trade-off",
+      "prov:used": "rdip:Dataset/ALIGN-1.8B",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ALIGN-Ablation-Results",
+        "@type": "schema:Dataset",
+        "schema:name": "Tables 8–10 + Figure 3 results"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Qualitative-Analysis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Qualitative retrieval demos and compositionality analysis (image±text queries)",
+      "prov:used": "rdip:Dataset/ALIGN-English-Model",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/ALIGN-Qualitative-Figures",
+        "@type": "schema:Dataset",
+        "schema:name": "Figures 4–5 (retrieval with complex text, image+text arithmetic)"
+      }
+    }
+  ]
+}

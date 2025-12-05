@@ -1,0 +1,298 @@
+@base <https://www.ait.ac.th/rdip/examples/v1> .
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix rdip: <https://www.ait.ac.th/rdip/rdipO/v1#> .   # Core RDIP ontology
+@prefix ex:   <https://www.ait.ac.th/rdip/examples/v1#> . # Example instances
+
+@prefix vivo: <http://vivoweb.org/ontology/core#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix schema: <https://schema.org/> .
+
+<https://www.ait.ac.th/rdip/examples/v1> a owl:Ontology ;
+  rdfs:label "Research Data Intelligence Platform – Example Case Studies" ;
+  rdfs:comment "Example instances (projects, activities, datasets, software, publications) demonstrating use of the RDIP ontology in three domains." ;
+  owl:versionIRI <https://www.ait.ac.th/rdip/examples/v1> ;
+  owl:versionInfo "v1" ;
+  owl:imports <https://www.ait.ac.th/rdip/rdipO/v1> .
+
+#################################################################
+# CASE STUDY 1 – COMPUTER SCIENCE (CHITWANAI)
+#################################################################
+
+# Organization
+ex:AIT a vivo:Organization ;
+    rdfs:label "Asian Institute of Technology" .
+
+# Project
+ex:Project_ChitwanAI a rdip:ResearchProject ;
+    rdip:title "ChitwanAI: Camera-trap wildlife detection in Nepal" ;
+    rdip:identifier "raid:CHITWAN-AI-2025" ;
+    rdip:description "Deep learning project using camera-trap images from Chitwan National Park to detect tigers and rhinos." ;
+    rdip:hasLeadOrganization ex:AIT ;
+    rdip:projectStart "2025-01-01T00:00:00"^^xsd:dateTime ;
+    rdip:projectEnd   "2025-12-31T00:00:00"^^xsd:dateTime .
+
+# People
+ex:Dr_R_N_Sharma a vivo:Person ;
+    rdfs:label "Dr. R. N. Sharma" .
+
+ex:Ms_S_Gurung a vivo:Person ;
+    rdfs:label "Ms. S. Gurung" .
+
+# Software
+ex:YOLOv8_v8_0_1 a rdip:SoftwareApplication ;
+    rdip:title "Ultralytics YOLOv8" ;
+    rdip:version "8.0.1" ;
+    rdip:identifier "https://docs.ultralytics.com/models/yolov8/" .
+
+ex:Roboflow_Platform a rdip:SoftwareApplication ;
+    rdip:title "Roboflow platform" ;
+    rdip:version "web-2025-01" ;
+    rdip:identifier "https://roboflow.com/" .
+
+# Method
+ex:COCO_BoundingBox_Protocol a rdip:Method ;
+    rdip:title "COCO-style bounding box annotation protocol" ;
+    rdip:description "Object detection annotation protocol using COCO conventions for class labels and bounding boxes." .
+
+# Dataset
+ex:AnnotatedTigerRhinoDataset a dcat:Dataset ;
+    rdip:title "Annotated tiger and rhino bounding boxes" ;
+    rdip:identifier "doi:10.1111/chitwanai.dataset" ;
+    rdip:accessLevel "open" ;
+    rdip:landingPage <https://example.org/chitwanai/dataset> ;
+    prov:wasGeneratedBy ex:CameraTrapAnnotationActivity ;
+    rdip:isOutputOf ex:Project_ChitwanAI .
+
+# Publication
+ex:ChitwanAI_Article a bibo:Article ;
+    rdip:title "A YOLOv8-based system for wildlife detection from camera-trap images in Nepal" ;
+    rdip:identifier "doi:10.2222/chitwanai.article" ;
+    rdip:description "Computer vision study describing a YOLOv8 pipeline for detecting wildlife in camera-trap imagery." ;
+    rdip:citesDataset ex:AnnotatedTigerRhinoDataset ;
+    rdip:isOutputOf ex:Project_ChitwanAI .
+
+# Data production activity
+ex:CameraTrapAnnotationActivity a rdip:DataProductionActivity ;
+    rdip:title "Camera-trap image annotation and preprocessing" ;
+    rdip:activityDescription "Annotating tiger and rhino images with COCO-style bounding boxes and preparing training data." ;
+    rdip:isPartOfProject ex:Project_ChitwanAI ;
+    rdip:usedSoftware ex:YOLOv8_v8_0_1 , ex:Roboflow_Platform ;
+    rdip:usedMethod ex:COCO_BoundingBox_Protocol ;
+    rdip:generatesDataset ex:AnnotatedTigerRhinoDataset ;
+    rdip:activityStart "2025-04-01T09:00:00"^^xsd:dateTime ;
+    rdip:activityEnd   "2025-06-30T17:00:00"^^xsd:dateTime .
+
+# Roles in activity
+ex:Role_ChitwanAI_PI a rdip:RoleInActivity ;
+    rdip:roleLabel "Principal Investigator" ;
+    rdip:rolePerformedBy ex:Dr_R_N_Sharma .
+
+ex:Role_ChitwanAI_Annotator a rdip:RoleInActivity ;
+    rdip:roleLabel "Data Annotator" ;
+    rdip:rolePerformedBy ex:Ms_S_Gurung .
+
+ex:CameraTrapAnnotationActivity rdip:hasActivityRole
+    ex:Role_ChitwanAI_PI ,
+    ex:Role_ChitwanAI_Annotator .
+
+ex:Project_ChitwanAI
+    rdip:hasActivity ex:CameraTrapAnnotationActivity ;
+    rdip:hasOutput ex:AnnotatedTigerRhinoDataset ,
+                   ex:ChitwanAI_Article ;
+    rdip:hasParticipant ex:Dr_R_N_Sharma ,
+                        ex:Ms_S_Gurung .
+
+#################################################################
+# CASE STUDY 2 – BUSINESS (NEPALSTARTUPS)
+#################################################################
+
+# Organization
+ex:KathmanduBusinessSchool a vivo:Organization ;
+    rdfs:label "Kathmandu Business School" .
+
+# Project
+ex:Project_NepalStartups a rdip:ResearchProject ;
+    rdip:title "Qualitative study of startup failure in Nepal" ;
+    rdip:identifier "raid:NEPAL-STARTUPS-2025" ;
+    rdip:description "Business research project conducting qualitative interviews with founders of failed startups in Nepal." ;
+    rdip:hasLeadOrganization ex:KathmanduBusinessSchool ;
+    rdip:projectStart "2025-02-01T00:00:00"^^xsd:dateTime ;
+    rdip:projectEnd   "2025-11-30T00:00:00"^^xsd:dateTime .
+
+# People
+ex:Dr_L_K_Shrestha a vivo:Person ;
+    rdfs:label "Dr. L. K. Shrestha" .
+
+ex:Mr_S_K_Jha a vivo:Person ;
+    rdfs:label "Mr. S. K. Jha" .
+
+# Software
+ex:NVivo_v14_23_0 a rdip:SoftwareApplication ;
+    rdip:title "NVivo" ;
+    rdip:version "14.23.0" ;
+    rdip:identifier "https://lumivero.com/products/nvivo/" .
+
+# Method
+ex:BraunClarkeFramework a rdip:Method ;
+    rdip:title "Braun and Clarke thematic analysis framework" ;
+    rdip:description "Six-phase framework for reflexive thematic analysis of qualitative data." .
+
+# Article
+ex:NepalStartups_Article a bibo:Article ;
+    rdip:title "Understanding startup failure in Nepal" ;
+    rdip:identifier "doi:10.6666/nepalstartups.article" ;
+    rdip:isOutputOf ex:Project_NepalStartups .
+
+# Dataset
+ex:AnonymizedTranscriptsDataset a dcat:Dataset ;
+    rdip:title "Anonymized interview transcripts on startup failure in Nepal" ;
+    rdip:identifier "doi:10.3333/nepalstartups.dataset" ;
+    rdip:accessLevel "restricted-metadata-only" ;
+    rdip:landingPage <https://example.org/nepalstartups/metadata> ;
+    prov:wasGeneratedBy ex:QualitativeAnalysisActivity ;
+    rdip:isOutputOf ex:Project_NepalStartups .
+
+# Data production activity
+ex:QualitativeAnalysisActivity a rdip:DataProductionActivity ;
+    rdip:title "Qualitative interview transcription and thematic coding" ;
+    rdip:activityDescription "Transcribing founder interviews and conducting thematic analysis on startup failure factors." ;
+    rdip:isPartOfProject ex:Project_NepalStartups ;
+    rdip:usedSoftware ex:NVivo_v14_23_0 ;
+    rdip:usedMethod ex:BraunClarkeFramework ;
+    rdip:generatesDataset ex:AnonymizedTranscriptsDataset ;
+    rdip:activityStart "2025-03-15T09:00:00"^^xsd:dateTime ;
+    rdip:activityEnd   "2025-08-31T17:00:00"^^xsd:dateTime .
+
+# Roles in activity
+ex:Role_NepalStartups_PI a rdip:RoleInActivity ;
+    rdip:roleLabel "Principal Investigator" ;
+    rdip:rolePerformedBy ex:Dr_L_K_Shrestha .
+
+ex:Role_NepalStartups_Assistant a rdip:RoleInActivity ;
+    rdip:roleLabel "Research Assistant" ;
+    rdip:rolePerformedBy ex:Mr_S_K_Jha .
+
+ex:QualitativeAnalysisActivity rdip:hasActivityRole
+    ex:Role_NepalStartups_PI ,
+    ex:Role_NepalStartups_Assistant .
+
+ex:Project_NepalStartups
+    rdip:hasActivity ex:QualitativeAnalysisActivity ;
+    rdip:hasOutput ex:AnonymizedTranscriptsDataset ,
+                   ex:NepalStartups_Article ;
+    rdip:hasParticipant ex:Dr_L_K_Shrestha ,
+                        ex:Mr_S_K_Jha .
+
+#################################################################
+# CASE STUDY 3 – MEDICAL (THAIMEDAI)
+#################################################################
+
+# Organization
+ex:ThaiUniversityHospital a vivo:Organization ;
+    rdfs:label "Thai University Hospital" .
+
+# Project
+ex:Project_ThaiMedAI a rdip:ResearchProject ;
+    rdip:title "AI-assisted screening for diabetic retinopathy in Thailand" ;
+    rdip:identifier "raid:THAI-MED-AI-2025" ;
+    rdip:description "Medical AI project developing a deep learning system for early detection of diabetic retinopathy from retinal images." ;
+    rdip:hasLeadOrganization ex:ThaiUniversityHospital ;
+    rdip:projectStart "2025-03-01T00:00:00"^^xsd:dateTime ;
+    rdip:projectEnd   "2026-02-28T00:00:00"^^xsd:dateTime .
+
+# People
+ex:Dr_P_Kittipong a vivo:Person ;
+    rdfs:label "Dr. P. Kittipong" .
+
+ex:Ms_R_Thanaporn a vivo:Person ;
+    rdfs:label "Ms. R. Thanaporn" .
+
+ex:Mr_K_Boonchai a vivo:Person ;
+    rdfs:label "Mr. K. Boonchai" .
+
+# Software
+ex:TensorFlow_v2_15 a rdip:SoftwareApplication ;
+    rdip:title "TensorFlow" ;
+    rdip:version "2.15" ;
+    rdip:identifier "https://www.tensorflow.org/" .
+
+ex:OpenCV_v4_9 a rdip:SoftwareApplication ;
+    rdip:title "OpenCV" ;
+    rdip:version "4.9" ;
+    rdip:identifier "https://opencv.org/" .
+
+ex:ThaiMedAI_Software a rdip:SoftwareApplication ;
+    rdip:title "ThaiMedAI retinal screening model" ;
+    rdip:version "1.0.0" ;
+    rdip:description "Trained convolutional neural network model for automated diabetic retinopathy screening." ;
+    rdip:identifier "https://example.org/thaimedai/software" ;
+    rdip:isOutputOf ex:Project_ThaiMedAI .
+
+# Method
+ex:CNN_Segmentation_Method a rdip:Method ;
+    rdip:title "Deep CNN segmentation and classification protocol" ;
+    rdip:description "Protocol describing preprocessing, segmentation, and CNN training for retinal image analysis." .
+
+# Dataset
+ex:ThaiRetinaDataset a dcat:Dataset ;
+    rdip:title "Anonymized retinal fundus image dataset from Thai screening program" ;
+    rdip:identifier "doi:10.4444/thaimedai.dataset" ;
+    rdip:accessLevel "restricted-controlled-access" ;
+    rdip:landingPage <https://example.org/thaimedai/dataset> ;
+    prov:wasGeneratedBy ex:RetinalImageProcessingActivity ;
+    rdip:isOutputOf ex:Project_ThaiMedAI .
+
+# Publication
+ex:ThaiMedAI_Article a bibo:Article ;
+    rdip:title "AI-based retinal screening for early diabetic retinopathy in Thailand" ;
+    rdip:identifier "doi:10.5555/thaimedai.article" ;
+    rdip:description "Clinical evaluation of an AI-assisted retinal screening system for diabetic retinopathy." ;
+    rdip:citesDataset ex:ThaiRetinaDataset ;
+    rdip:isOutputOf ex:Project_ThaiMedAI .
+
+# Data production activity
+ex:RetinalImageProcessingActivity a rdip:DataProductionActivity ;
+    rdip:title "Retinal image preprocessing and CNN training" ;
+    rdip:activityDescription "Preprocessing retinal images, segmenting lesions and training a CNN model for diabetic retinopathy classification." ;
+    rdip:isPartOfProject ex:Project_ThaiMedAI ;
+    rdip:usedSoftware ex:TensorFlow_v2_15 , ex:OpenCV_v4_9 ;
+    rdip:usedMethod ex:CNN_Segmentation_Method ;
+    rdip:generatesDataset ex:ThaiRetinaDataset ;
+    rdip:generatesSoftware ex:ThaiMedAI_Software ;
+    rdip:activityStart "2025-05-01T09:00:00"^^xsd:dateTime ;
+    rdip:activityEnd   "2025-10-31T17:00:00"^^xsd:dateTime .
+
+# Roles in activity
+ex:Role_ThaiMedAI_PI a rdip:RoleInActivity ;
+    rdip:roleLabel "Principal Investigator" ;
+    rdip:rolePerformedBy ex:Dr_P_Kittipong .
+
+ex:Role_ThaiMedAI_Collector a rdip:RoleInActivity ;
+    rdip:roleLabel "Data Collector" ;
+    rdip:rolePerformedBy ex:Ms_R_Thanaporn .
+
+ex:Role_ThaiMedAI_Engineer a rdip:RoleInActivity ;
+    rdip:roleLabel "Software Engineer" ;
+    rdip:rolePerformedBy ex:Mr_K_Boonchai .
+
+ex:RetinalImageProcessingActivity rdip:hasActivityRole
+    ex:Role_ThaiMedAI_PI ,
+    ex:Role_ThaiMedAI_Collector ,
+    ex:Role_ThaiMedAI_Engineer .
+
+ex:Project_ThaiMedAI
+    rdip:hasActivity ex:RetinalImageProcessingActivity ;
+    rdip:hasOutput ex:ThaiRetinaDataset ,
+                   ex:ThaiMedAI_Software ,
+                   ex:ThaiMedAI_Article ;
+    rdip:hasParticipant ex:Dr_P_Kittipong ,
+                        ex:Ms_R_Thanaporn ,
+                        ex:Mr_K_Boonchai .

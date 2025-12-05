@@ -1,0 +1,115 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:RNN_SearchSpace_Sampling",
+      "@type": "prov:Activity",
+      "prov:generated": {
+        "@id": "_:RNN_Architecture_Sample"
+      },
+      "prov:used": [
+        {"@id": "_:PTB_Dataset"},
+        {"@id": "_:WikiText2_Dataset"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:Custom_Graph_Generator"}
+      ],
+      "rdfs:label": "Random sampling and manual addition of 14,322 recurrent cell architectures (including LSTM, GRU, RNN baselines) from attributed-graph search space"
+    },
+
+    {
+      "@id": "_:RNN_Training_Activity",
+      "@type": "prov:Activity",
+      "prov:generated": {
+        "@id": "_:Trained_RNN_Checkpoints"
+      },
+      "prov:used": [
+        {"@id": "_:RNN_Architecture_Sample"},
+        {"@id": "_:PTB_Dataset"},
+        {"@id": "_:WikiText2_Dataset"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:AWD_LSTM_Implementation"},
+        {"@id": "_:Tesla_V100_Cluster"}
+      ],
+      "rdfs:label": "Training of 14,322 RNN architectures (AWD-LSTM macro + generated micro cells) on PTB (all) and WikiText-2 (stratified subsample) with fixed hyper-parameters"
+    },
+
+    {
+      "@id": "_:NAS_Benchmark_Construction",
+      "@type": "prov:Activity",
+      "prov:generated": {
+        "@id": "_:RNN_NAS_Benchmark"
+      },
+      "prov:used": [
+        {"@id": "_:Trained_RNN_Checkpoints"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:Custom_Benchmark_Environment"}
+      ],
+      "rdfs:label": "Construction of RNN NAS benchmark with pre-computed training curves, wall-time, perplexity, and checkpoint simulation for 14,322 architectures"
+    },
+
+    {
+      "@id": "_:PTB_Dataset",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Penn Tree Bank (PTB) language modeling dataset (Marcus et al., 1993)"
+    },
+
+    {
+      "@id": "_:WikiText2_Dataset",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "WikiText-2 language modeling dataset (Merity et al., 2016)"
+    },
+
+    {
+      "@id": "_:RNN_Architecture_Sample",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:RNN_SearchSpace_Sampling",
+      "rdfs:label": "Sample of 14,322 recurrent cell architectures (14,319 randomly generated + LSTM + GRU + RNN) represented as attributed graphs"
+    },
+
+    {
+      "@id": "_:Trained_RNN_Checkpoints",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:RNN_Training_Activity",
+      "rdfs:label": "Trained model checkpoints and performance logs (per-epoch perplexity, wall-time) for 14,322 RNN architectures on PTB and 289 on WikiText-2"
+    },
+
+    {
+      "@id": "_:RNN_NAS_Benchmark",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:NAS_Benchmark_Construction",
+      "rdfs:label": "RNN NAS benchmark dataset with pre-computed training trajectories and metrics for 14,322 architectures (supports random search, Hyperband, BO, RE, etc.)"
+    },
+
+    {
+      "@id": "_:Custom_Graph_Generator",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Custom attributed-graph generation procedure for recurrent cells (nodes ≤24, hidden states ≤3, operations: Linear/Blending/Product/Sum + activations)"
+    },
+
+    {
+      "@id": "_:AWD_LSTM_Implementation",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "AWD-LSTM (Merity et al., 2018) PyTorch implementation with fixed dropouts and weight-drop regularization"
+    },
+
+    {
+      "@id": "_:Tesla_V100_Cluster",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Zhores HPC cluster with Tesla V100-SXM2 16GB GPUs used for architecture training"
+    },
+
+    {
+      "@id": "_:Custom_Benchmark_Environment",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Custom NAS simulation environment providing epoch-level metrics, checkpoint simulation, and wall-time tracking"
+    }
+  ]
+}

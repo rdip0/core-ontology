@@ -1,0 +1,81 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:BioIE_Review_Activity",
+      "@type": "prov:Activity",
+      "prov:used": [
+        {"@id": "_:BioIE_Labeled_Corpora"},
+        {"@id": "_:BioIE_Unlabeled_Corpora"},
+        {"@id": "_:Clinical_EHR_Data"},
+        {"@id": "_:Biomedical_Literature"},
+        {"@id": "_:Medical_Imaging_Data"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:CRF_Software"},
+        {"@id": "_:SSVM_Software"},
+        {"@id": "_:DeepLearning_Software"},
+        {"@id": "_:OpenIE_Software"},
+        {"@id": "_:Crowdsourcing_Platforms"}
+      ],
+      "rdfs:label": "Review and synthesis of learning-based methods for Biomedical Information Extraction (BioIE) covering supervised, semi-supervised, unsupervised, hybrid, OpenIE, and deep learning approaches"
+    },
+
+    {
+      "@id": "_:BioIE_Labeled_Corpora",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Annotated biomedical and clinical corpora used for supervised BioIE (e.g., GENIA, BioNLP shared task corpora, DDI corpora, clinical notes with NER/relation/event annotations)"
+    },
+    {
+      "@id": "_:BioIE_Unlabeled_Corpora",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Large-scale unlabeled biomedical literature and clinical text used in semi-supervised, unsupervised, and distant supervision approaches"
+    },
+    {
+      "@id": "_:Clinical_EHR_Data",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Electronic Health Records (EHR) and clinical narratives used for clinical concept extraction, relation extraction, and temporal/abbreviation tasks"
+    },
+    {
+      "@id": "_:Biomedical_Literature",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "PubMed/MEDLINE abstracts and full-text articles used across BioIE tasks (NER, PPI, DDI, event extraction)"
+    },
+    {
+      "@id": "_:Medical_Imaging_Data",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Medical imaging datasets (CT scans, chest X-rays, radiology reports) used with deep learning for pathology detection and image-text extraction"
+    },
+
+    {
+      "@id": "_:CRF_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Conditional Random Fields (CRF) implementations used for sequence labeling in BioIE"
+    },
+    {
+      "@id": "_:SSVM_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Structured Support Vector Machines (SSVM) and kernel-based systems (tree kernels, graph kernels, MKL) for BioIE"
+    },
+    {
+      "@id": "_:DeepLearning_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Deep learning frameworks and models (CNNs, RNNs/LSTMs/GRUs, word embeddings, Med2Vec, denoising autoencoders) applied to BioIE and clinical prediction"
+    },
+    {
+      "@id": "_:OpenIE_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Open Information Extraction systems (light and heavy extractors, ReVerb-style, NELL adaptation, universal schema) applied or discussed for scalable BioIE"
+    },
+    {
+      "@id": "_:Crowdsourcing_Platforms",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Crowdsourcing platforms and tools (e.g., CrowdTruth, Amazon Mechanical Turk equivalents) used for cost-effective annotation of biomedical and clinical texts"
+    }
+  ]
+}

@@ -1,0 +1,1127 @@
+############################################################
+# Consolidated Data File generated from 12 sources in 'dcat-prov'.
+############################################################
+
+
+
+# --- START FILE: 1606_07993v1.json (Path: dcat-prov/1606_07993v1.json) ---
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:BioIE_Review_Activity",
+      "@type": "prov:Activity",
+      "prov:used": [
+        {"@id": "_:BioIE_Labeled_Corpora"},
+        {"@id": "_:BioIE_Unlabeled_Corpora"},
+        {"@id": "_:Clinical_EHR_Data"},
+        {"@id": "_:Biomedical_Literature"},
+        {"@id": "_:Medical_Imaging_Data"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:CRF_Software"},
+        {"@id": "_:SSVM_Software"},
+        {"@id": "_:DeepLearning_Software"},
+        {"@id": "_:OpenIE_Software"},
+        {"@id": "_:Crowdsourcing_Platforms"}
+      ],
+      "rdfs:label": "Review and synthesis of learning-based methods for Biomedical Information Extraction (BioIE) covering supervised, semi-supervised, unsupervised, hybrid, OpenIE, and deep learning approaches"
+    },
+
+    {
+      "@id": "_:BioIE_Labeled_Corpora",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Annotated biomedical and clinical corpora used for supervised BioIE (e.g., GENIA, BioNLP shared task corpora, DDI corpora, clinical notes with NER/relation/event annotations)"
+    },
+    {
+      "@id": "_:BioIE_Unlabeled_Corpora",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Large-scale unlabeled biomedical literature and clinical text used in semi-supervised, unsupervised, and distant supervision approaches"
+    },
+    {
+      "@id": "_:Clinical_EHR_Data",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Electronic Health Records (EHR) and clinical narratives used for clinical concept extraction, relation extraction, and temporal/abbreviation tasks"
+    },
+    {
+      "@id": "_:Biomedical_Literature",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "PubMed/MEDLINE abstracts and full-text articles used across BioIE tasks (NER, PPI, DDI, event extraction)"
+    },
+    {
+      "@id": "_:Medical_Imaging_Data",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Medical imaging datasets (CT scans, chest X-rays, radiology reports) used with deep learning for pathology detection and image-text extraction"
+    },
+
+    {
+      "@id": "_:CRF_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Conditional Random Fields (CRF) implementations used for sequence labeling in BioIE"
+    },
+    {
+      "@id": "_:SSVM_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Structured Support Vector Machines (SSVM) and kernel-based systems (tree kernels, graph kernels, MKL) for BioIE"
+    },
+    {
+      "@id": "_:DeepLearning_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Deep learning frameworks and models (CNNs, RNNs/LSTMs/GRUs, word embeddings, Med2Vec, denoising autoencoders) applied to BioIE and clinical prediction"
+    },
+    {
+      "@id": "_:OpenIE_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Open Information Extraction systems (light and heavy extractors, ReVerb-style, NELL adaptation, universal schema) applied or discussed for scalable BioIE"
+    },
+    {
+      "@id": "_:Crowdsourcing_Platforms",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Crowdsourcing platforms and tools (e.g., CrowdTruth, Amazon Mechanical Turk equivalents) used for cost-effective annotation of biomedical and clinical texts"
+    }
+  ]
+}
+# --- END FILE: 1606_07993v1.json ---
+
+
+# --- START FILE: 1908_07835v1.json (Path: dcat-prov/1908_07835v1.json) ---
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:PubLayNet_Construction_Activity",
+      "@type": "prov:Activity",
+      "prov:generated": {
+        "@id": "_:PubLayNet_Dataset"
+      },
+      "prov:used": [
+        {"@id": "_:PMCOA_XML_Collection"},
+        {"@id": "_:PMCOA_PDF_Collection"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:PDFMiner_Software"},
+        {"@id": "_:FuzzySearch_Software"},
+        {"@id": "_:Custom_Annotation_Pipeline"}
+      ],
+      "rdfs:label": "Automatic construction of PubLayNet document layout annotation dataset by PDF-XML alignment on PubMed Central Open Access subset"
+    },
+
+    {
+      "@id": "_:PMCOA_XML_Collection",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "PubMed Central Open Access XML articles (NLM-JATS schema, 1,162,856 complete articles downloaded 2018-10-03)"
+    },
+
+    {
+      "@id": "_:PMCOA_PDF_Collection",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Corresponding PDF versions of 1,162,856 PMCOA articles"
+    },
+
+    {
+      "@id": "_:PubLayNet_Dataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:PubLayNet_Construction_Activity",
+      "prov:wasDerivedFrom": [
+        "_:PMCOA_XML_Collection",
+        "_:PMCOA_PDF_Collection"
+      ],
+      "rdfs:label": "PubLayNet document layout dataset (335k+ pages annotated with Text, Title, List, Table, Figure categories; train/val/test splits with manual curation of val/test)"
+    },
+
+    {
+      "@id": "_:PDFMiner_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "PDFMiner (Python) used for low-level PDF layout parsing (textboxes, textlines, images, geometric shapes)"
+    },
+
+    {
+      "@id": "_:FuzzySearch_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "fuzzysearch Python package (Levenshtein-distance fuzzy string matching) for robust PDF-text to XML-text alignment"
+    },
+
+    {
+      "@id": "_:Custom_Annotation_Pipeline",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Custom Python annotation pipeline (XML preprocessing, node grouping, adaptive-threshold fuzzy matching, margin-based figure/table body detection, polygon segmentation generation, quality-control filtering ≥99% coverage)"
+    }
+  ]
+}
+# --- END FILE: 1908_07835v1.json ---
+
+
+# --- START FILE: 2006_07116v1.json (Path: dcat-prov/2006_07116v1.json) ---
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:RNN_SearchSpace_Sampling",
+      "@type": "prov:Activity",
+      "prov:generated": {
+        "@id": "_:RNN_Architecture_Sample"
+      },
+      "prov:used": [
+        {"@id": "_:PTB_Dataset"},
+        {"@id": "_:WikiText2_Dataset"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:Custom_Graph_Generator"}
+      ],
+      "rdfs:label": "Random sampling and manual addition of 14,322 recurrent cell architectures (including LSTM, GRU, RNN baselines) from attributed-graph search space"
+    },
+
+    {
+      "@id": "_:RNN_Training_Activity",
+      "@type": "prov:Activity",
+      "prov:generated": {
+        "@id": "_:Trained_RNN_Checkpoints"
+      },
+      "prov:used": [
+        {"@id": "_:RNN_Architecture_Sample"},
+        {"@id": "_:PTB_Dataset"},
+        {"@id": "_:WikiText2_Dataset"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:AWD_LSTM_Implementation"},
+        {"@id": "_:Tesla_V100_Cluster"}
+      ],
+      "rdfs:label": "Training of 14,322 RNN architectures (AWD-LSTM macro + generated micro cells) on PTB (all) and WikiText-2 (stratified subsample) with fixed hyper-parameters"
+    },
+
+    {
+      "@id": "_:NAS_Benchmark_Construction",
+      "@type": "prov:Activity",
+      "prov:generated": {
+        "@id": "_:RNN_NAS_Benchmark"
+      },
+      "prov:used": [
+        {"@id": "_:Trained_RNN_Checkpoints"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:Custom_Benchmark_Environment"}
+      ],
+      "rdfs:label": "Construction of RNN NAS benchmark with pre-computed training curves, wall-time, perplexity, and checkpoint simulation for 14,322 architectures"
+    },
+
+    {
+      "@id": "_:PTB_Dataset",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Penn Tree Bank (PTB) language modeling dataset (Marcus et al., 1993)"
+    },
+
+    {
+      "@id": "_:WikiText2_Dataset",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "WikiText-2 language modeling dataset (Merity et al., 2016)"
+    },
+
+    {
+      "@id": "_:RNN_Architecture_Sample",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:RNN_SearchSpace_Sampling",
+      "rdfs:label": "Sample of 14,322 recurrent cell architectures (14,319 randomly generated + LSTM + GRU + RNN) represented as attributed graphs"
+    },
+
+    {
+      "@id": "_:Trained_RNN_Checkpoints",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:RNN_Training_Activity",
+      "rdfs:label": "Trained model checkpoints and performance logs (per-epoch perplexity, wall-time) for 14,322 RNN architectures on PTB and 289 on WikiText-2"
+    },
+
+    {
+      "@id": "_:RNN_NAS_Benchmark",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:NAS_Benchmark_Construction",
+      "rdfs:label": "RNN NAS benchmark dataset with pre-computed training trajectories and metrics for 14,322 architectures (supports random search, Hyperband, BO, RE, etc.)"
+    },
+
+    {
+      "@id": "_:Custom_Graph_Generator",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Custom attributed-graph generation procedure for recurrent cells (nodes ≤24, hidden states ≤3, operations: Linear/Blending/Product/Sum + activations)"
+    },
+
+    {
+      "@id": "_:AWD_LSTM_Implementation",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "AWD-LSTM (Merity et al., 2018) PyTorch implementation with fixed dropouts and weight-drop regularization"
+    },
+
+    {
+      "@id": "_:Tesla_V100_Cluster",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Zhores HPC cluster with Tesla V100-SXM2 16GB GPUs used for architecture training"
+    },
+
+    {
+      "@id": "_:Custom_Benchmark_Environment",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Custom NAS simulation environment providing epoch-level metrics, checkpoint simulation, and wall-time tracking"
+    }
+  ]
+}
+# --- END FILE: 2006_07116v1.json ---
+
+
+# --- START FILE: 2102_05918v2.json (Path: dcat-prov/2102_05918v2.json) ---
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:ALIGN_Pretraining_Activity",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:ALIGN_English_Model"},
+        {"@id": "_:ALIGN_Multilingual_Model"}
+      ],
+      "prov:used": [
+        {"@id": "_:ALIGN_English_Dataset"},
+        {"@id": "_:ALIGN_Multilingual_Dataset"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:EfficientNet_Software"},
+        {"@id": "_:BERT_Software"},
+        {"@id": "_:TPU_Training_Infrastructure"}
+      ],
+      "rdfs:label": "Pre-training of ALIGN dual-encoder vision-language models on 1.8B noisy web image-text pairs (English and multilingual versions)"
+    },
+
+    {
+      "@id": "_:ALIGN_Dataset_Construction_Activity",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:ALIGN_English_Dataset"},
+        {"@id": "_:ALIGN_Multilingual_Dataset"}
+      ],
+      "prov:used": [
+        {"@id": "_:Raw_Web_AltText_Pairs"}
+      ],
+      "rdfs:label": "Construction of large-scale noisy image-text datasets by relaxing Conceptual Captions cleaning pipeline (minimal frequency-based and size/aspect-ratio filtering)"
+    },
+
+    {
+      "@id": "_:Raw_Web_AltText_Pairs",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Raw English (and later multilingual) web-crawled image alt-text pairs before any cleaning"
+    },
+
+    {
+      "@id": "_:ALIGN_English_Dataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:ALIGN_Dataset_Construction_Activity",
+      "prov:wasDerivedFrom": "_:Raw_Web_AltText_Pairs",
+      "rdfs:label": "ALIGN English noisy image-text dataset (1.8 billion image-alt-text pairs after minimal cleaning)"
+    },
+
+    {
+      "@id": "_:ALIGN_Multilingual_Dataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:ALIGN_Dataset_Construction_Activity",
+      "prov:wasDerivedFrom": "_:Raw_Web_AltText_Pairs",
+      "rdfs:label": "ALIGN multilingual noisy image-text dataset (1.8 billion pairs covering 100+ languages)"
+    },
+
+    {
+      "@id": "_:ALIGN_English_Model",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:ALIGN_Pretraining_Activity",
+      "rdfs:label": "ALIGN English model weights (EfficientNet-L2 image encoder + BERT-Large text encoder trained with contrastive normalized softmax loss)"
+    },
+
+    {
+      "@id": "_:ALIGN_Multilingual_Model",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:ALIGN_Pretraining_Activity",
+      "rdfs:label": "ALIGN multilingual model weights (same architecture, trained on multilingual 1.8B dataset with 250k wordpiece vocabulary)"
+    },
+
+    {
+      "@id": "_:EfficientNet_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "EfficientNet (B1 to L2 variants) used as image encoder (global pooling, no 1x1 conv head)"
+    },
+
+    {
+      "@id": "_:BERT_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "BERT (Mini to Large) used as text encoder with additional linear projection layer"
+    },
+
+    {
+      "@id": "_:TPU_Training_Infrastructure",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Google Cloud TPUv3 (1024 cores) training infrastructure with LAMB optimizer and in-batch negatives"
+    }
+  ]
+}
+# --- END FILE: 2102_05918v2.json ---
+
+
+# --- START FILE: 2306_02177v1.json (Path: dcat-prov/2306_02177v1.json) ---
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "https://doi.org/10.31235/osf.io/XXXX", 
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:PP_CodedDataset"},
+        {"@id": "_:Congress_CodedDataset"},
+        {"@id": "_:NYT_CodedDataset"},
+        {"@id": "_:TGP_CodedDataset"}
+      ],
+      "prov:used": [
+        {"@id": "_:PP_RawTexts"},
+        {"@id": "_:Congress_RawSummaries"},
+        {"@id": "_:NYT_RawHeadlines"},
+        {"@id": "_:TGP_RawStatements"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:GPT3_TextDavinci"},
+        {"@id": "_:HumanCoders"},
+        {"@id": "_:SVC_SupervisedModel"}
+      ],
+      "rdfs:label": "Coding experiments using GPT-3 on four social-science text classification tasks (Rytting et al.)"
+    },
+    {
+      "@id": "_:GPT3_TextDavinci",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "OpenAI GPT-3 (text-davinci family) used in few-shot prompted mode with 2–4 exemplars"
+    },
+    {
+      "@id": "_:HumanCoders",
+      "@type": "prov:Agent",
+      "rdfs:label": "Human coders (lightly trained for PP/NYT/Congress, intensively trained for TGP)"
+    },
+    {
+      "@id": "_:SVC_SupervisedModel",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Bag-of-words Support Vector Classifier (SVC) trained on 3,000 labeled examples (used only on TGP)"
+    },
+
+    {
+      "@id": "_:PP_RawTexts",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Pigeonholing Partisans (PP) raw open-ended descriptions of partisans (7,675 texts from Rothschild et al. 2019 and related work)"
+    },
+    {
+      "@id": "_:PP_CodedDataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": {"@id": "https://doi.org/10.31235/osf.io/XXXX"},
+      "prov:wasDerivedFrom": "_:PP_RawTexts",
+      "rdfs:label": "PP dataset with human and GPT-3 codes on five dimensions (positivity, extremity, traits, issues, groups)"
+    },
+
+    {
+      "@id": "_:Congress_RawSummaries",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Congressional Hearing summaries (1946–2010) from Comparative Agendas Project"
+    },
+    {
+      "@id": "_:Congress_CodedDataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": {"@id": "https://doi.org/10.31235/osf.io/XXXX"},
+      "prov:wasDerivedFrom": "_:Congress_RawSummaries",
+      "rdfs:label": "CAP-coded Congressional hearing summaries (n=326 re-coded texts) with codes from 3 humans + GPT-3"
+    },
+
+    {
+      "@id": "_:NYT_RawHeadlines",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "New York Times front-page headlines 1996–2006 (Boydstun 2013)"
+    },
+    {
+      "@id": "_:NYT_CodedDataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": {"@id": "https://doi.org/10.31235/osf.io/XXXX"},
+      "prov:wasDerivedFrom": "_:NYT_RawHeadlines",
+      "rdfs:label": "NYT headline CAP codes (n=560 sampled headlines) with codes from 4 humans + GPT-3 (headline-only)"
+    },
+
+    {
+      "@id": "_:TGP_RawStatements",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "The Guardian Populism survey open-ended responses on responsibility for political problems (≈20,000 responses, 4,000 human-coded)"
+    },
+    {
+      "@id": "_:TGP_CodedDataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": {"@id": "https://doi.org/10.31235/osf.io/XXXX"},
+      "prov:wasDerivedFrom": "_:TGP_RawStatements",
+      "rdfs:label": "TGP populism binary codes (presence/absence) from 2 intensively trained humans, GPT-3 (few-shot), and SVC (supervised baseline)"
+    }
+  ]
+}
+# --- END FILE: 2306_02177v1.json ---
+
+
+# --- START FILE: 2403_01208v2.json (Path: dcat-prov/2403_01208v2.json) ---
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:LabelCollectionReview_Activity",
+      "@type": "prov:Activity",
+      "prov:used": [
+        {"@id": "_:Crowdworker_Labels_Dataset"},
+        {"@id": "_:Survey_Response_Datasets"},
+        {"@id": "_:HateSpeech_Tweet_Labels"},
+        {"@id": "_:Wikipedia_Attack_Labels"},
+        {"@id": "_:InstructGPT_RLHF_Labels"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:Crowdworker_Agents"},
+        {"@id": "_:Survey_Respondents"},
+        {"@id": "_:Labeling_Platforms"}
+      ],
+      "rdfs:label": "Theoretical review and hypothesis derivation linking survey response theory to machine learning data labeling quality (including order effects, satisficing, selection bias, and mitigation strategies)"
+    },
+
+    {
+      "@id": "_:Crowdworker_Labels_Dataset",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Labels produced by crowdworkers on platforms (e.g., MTurk, Prolific, Appen, Scale AI, Upwork) for NLP/ML tasks including hate speech, toxicity, RLHF preference data, image labeling, and annotation benchmarks"
+    },
+
+    {
+      "@id": "_:Survey_Response_Datasets",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Survey response datasets used as empirical evidence or analogy (including victimization surveys, health insurance surveys, political opinion surveys, cognitive interviewing pretest data, paradata-enabled surveys)"
+    },
+
+    {
+      "@id": "_:HateSpeech_Tweet_Labels",
+      "@type": "dcat:Dataset",
+      "prov:wasDerivedFrom": "_:Crowdworker_Labels_Dataset",
+      "rdfs:label": "Experimental hate speech/offensive language tweet labeling datasets from Kern et al. (2023) and Beck et al. (2024) with manipulated instrument design (single-screen vs multi-screen, order effects)"
+    },
+
+    {
+      "@id": "_:Wikipedia_Attack_Labels",
+      "@type": "dcat:Dataset",
+      "prov:wasDerivedFrom": "_:Crowdworker_Labels_Dataset",
+      "rdfs:label": "Wikipedia comment attack/toxicity labels showing annotator demographic effects (Al Kuwatly et al., 2020)"
+    },
+
+    {
+      "@id": "_:InstructGPT_RLHF_Labels",
+      "@type": "dcat:Dataset",
+      "prov:wasDerivedFrom": "_:Crowdworker_Labels_Dataset",
+      "rdfs:label": "Reinforcement Learning from Human Feedback (RLHF) preference and ranking labels used to fine-tune InstructGPT / GPT-4 series models (Ouyang et al., 2022; Glaese et al., 2022; Bai et al., 2022)"
+    },
+
+    {
+      "@id": "_:Crowdworker_Agents",
+      "@type": "prov:Agent",
+      "rdfs:label": "Crowdworkers (predominantly from Global South, younger, lower-income, non-representative of end-user populations) acting as human labelers on commercial platforms"
+    },
+
+    {
+      "@id": "_:Survey_Respondents",
+      "@type": "prov:Agent",
+      "rdfs:label": "General population survey respondents (probability and non-probability samples) whose cognitive and behavioral response processes are used as theoretical foundation"
+    },
+
+    {
+      "@id": "_:Labeling_Platforms",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Crowdsourcing and annotation platforms (Amazon Mechanical Turk, Prolific, Appen, Scale AI, Upwork, custom labeling interfaces) used to collect training labels"
+    }
+  ]
+}
+# --- END FILE: 2403_01208v2.json ---
+
+
+# --- START FILE: 2410_01837v1.json (Path: dcat-prov/2410_01837v1.json) ---
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:CodeSurvey_Activity",
+      "@type": "prov:Activity",
+      "prov:generated": {
+        "@id": "_:eBPF_Commit_Survey_Dataset"
+      },
+      "prov:used": [
+        {"@id": "_:Linux_eBPF_Commits_Raw"},
+        {"@id": "_:Linux_Git_Repository"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:GPT4o_Agent"},
+        {"@id": "_:Human_Experts"}
+      ],
+      "rdfs:label": "Code-Survey methodology application: LLM-driven structured survey completion on >15,000 Linux eBPF subsystem commits"
+    },
+
+    {
+      "@id": "_:Linux_eBPF_Commits_Raw",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Raw Linux kernel Git commits (2017–2024) touching eBPF subsystem (commit messages, diffs, metadata; >15,000 commits)"
+    },
+
+    {
+      "@id": "_:Linux_Git_Repository",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Linux kernel Git repository source data used for commit extraction and filtering"
+    },
+
+    {
+      "@id": "_:eBPF_Commit_Survey_Dataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:CodeSurvey_Activity",
+      "prov:wasDerivedFrom": "_:Linux_eBPF_Commits_Raw",
+      "rdfs:label": "Structured eBPF commit survey dataset (commit_survey.csv) with LLM-generated fields: summary, keywords, commit type, complexity, implementation/logic components, use cases/events"
+    },
+
+    {
+      "@id": "_:GPT4o_Agent",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "OpenAI GPT-4o model used as LLM agent for survey design assistance and automated survey completion on eBPF commits"
+    },
+
+    {
+      "@id": "_:Human_Experts",
+      "@type": "prov:Agent",
+      "rdfs:label": "Human domain experts (eBPF maintainers and contributors) involved in survey design, validation, and result confirmation"
+    }
+  ]
+}
+# --- END FILE: 2410_01837v1.json ---
+
+
+# --- START FILE: 2410_22481v1.json (Path: dcat-prov/2410_22481v1.json) ---
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "https://arxiv.org/abs/2410.22481",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:SimulatedTrainingDataset"},
+        {"@id": "_:SimulatedTestDataset"},
+        {"@id": "_:AMPATHDatasetSplit"}
+      ],
+      "prov:used": [
+        {"@id": "_:SimulationProcedure"},
+        {"@id": "_:AMPATHEHRDataset"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:BayesianTransitionModelSoftware"},
+        {"@id": "_:BARTSoftware"},
+        {"@id": "_:LogisticRegressionSoftware"}
+      ],
+      "rdfs:label": "Simulation study and real-data analysis described in arXiv:2410.22481v1"
+    },
+    {
+      "@id": "_:SimulationProcedure",
+      "@type": "prov:Activity",
+      "rdfs:label": "Monte-Carlo simulation of HIV retention data (300 replications, n=500 train + 500 uncensored test per replication)",
+      "prov:generated": [
+        {"@id": "_:SimulatedTrainingDataset"},
+        {"@id": "_:SimulatedTestDataset"}
+      ]
+    },
+    {
+      "@id": "_:SimulatedTrainingDataset",
+      "@type": "dcat:Dataset",
+      "dcat:distribution": {
+        "@type": "dcat:Distribution",
+        "rdfs:label": "Synthetic training datasets with controlled censoring (20%/40%) and covariate missingness (none/low/high)"
+      },
+      "prov:wasGeneratedBy": "_:SimulationProcedure"
+    },
+    {
+      "@id": "_:SimulatedTestDataset",
+      "@type": "dcat:Dataset",
+      "dcat:distribution": {
+        "@type": "dcat:Distribution",
+        "rdfs:label": "Synthetic uncensored test datasets (n=500, no censoring, complete Y1(∆))"
+      },
+      "prov:wasGeneratedBy": "_:SimulationProcedure"
+    },
+    {
+      "@id": "_:AMPATHEHRDataset",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "AMPATH electronic health records (first visit, 2014-01-01 to 2023-07-31, n=11,011 adults with HIV from four clinics)",
+      "dcat:keyword": ["HIV retention", "scheduled return time", "censoring", "competing risks", "missing covariates"]
+    },
+    {
+      "@id": "_:AMPATHDatasetSplit",
+      "@type": "dcat:Dataset",
+      "prov:wasDerivedFrom": "_:AMPATHEHRDataset",
+      "rdfs:label": "AMPATH dataset split (n=10,011 training + n=1,000 held-out test subjects, stratified random sampling)"
+    },
+    {
+      "@id": "_:BayesianTransitionModelSoftware",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Custom Bayesian Transition Model (BTM) implementation with cause-specific Weibull hazards and b-splines, stratified by clinic × scheduling × missingness pattern"
+    },
+    {
+      "@id": "_:BARTSoftware",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Bayesian Additive Regression Trees (BART) applied to dichotomized retention outcome with implicit imputation of censored cases"
+    },
+    {
+      "@id": "_:LogisticRegressionSoftware",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Stratified maximum-likelihood logistic regression on dichotomized retention outcome"
+    }
+  ]
+}
+# --- END FILE: 2410_22481v1.json ---
+
+
+# --- START FILE: 2501_11632v2.json (Path: dcat-prov/2501_11632v2.json) ---
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:BKG_Review_Activity",
+      "@type": "prov:Activity",
+      "prov:used": [
+        {"@id": "_:Biomedical_Knowledge_Graphs"},
+        {"@id": "_:Biomedical_Literature_Corpus"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:KGE_Software"},
+        {"@id": "_:GNN_Software"},
+        {"@id": "_:LLM_Software"},
+        {"@id": "_:RuleBased_Software"}
+      ],
+      "rdfs:label": "Systematic review of inference, prediction, interpretation, and application methods on Biomedical Knowledge Graphs (BKGs)"
+    },
+
+    {
+      "@id": "_:Biomedical_Knowledge_Graphs",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Collection of Biomedical Knowledge Graphs used/reviewed (Hetionet, PrimeKG, PharmKG, GenomicKB, SDKG-11, KGHC, PubMedKG, DRAGON, TxGNN, etc.)"
+    },
+
+    {
+      "@id": "_:Biomedical_Literature_Corpus",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Biomedical literature corpus (PubMed abstracts, full-text articles, clinical notes, EMRs) used as source data for BKG construction and evaluation"
+    },
+
+    {
+      "@id": "_:KGE_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Knowledge Graph Embedding models (TransE, TransH, TransR, RESCAL, DistMult, ComplEx, etc.) used for link prediction and embedding-based inference on BKGs"
+    },
+
+    {
+      "@id": "_:GNN_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Graph Neural Network models (GCN, TxGNN, etc.) applied to BKGs for node/relation prediction and multi-hop reasoning"
+    },
+
+    {
+      "@id": "_:LLM_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Large Language Models (GPT-series, LLaMA, etc.) integrated with BKGs for assisted interpretation, graph-to-text generation, RAG, and query understanding"
+    },
+
+    {
+      "@id": "_:RuleBased_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Rule-based and path-based reasoning systems (AMIE, PoLo, XG4Repo, random walks, meta-path methods) used for logical inference and explanation on BKGs"
+    }
+  ]
+}
+# --- END FILE: 2501_11632v2.json ---
+
+
+# --- START FILE: 2502_07068v2.json (Path: dcat-prov/2502_07068v2.json) ---
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:WVS_Simulation_Dataset_Construction",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:WVS_Train_Val_Test_EN"},
+        {"@id": "_:WVS_Train_Val_Test_ZH"},
+        {"@id": "_:Pew_Test_Subset"}
+      ],
+      "prov:used": [
+        {"@id": "_:WVS_2017_2022_Raw"},
+        {"@id": "_:Pew_Global_Attitudes_Raw"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:GLM4_Translator"},
+        {"@id": "_:Custom_Formatting_Scripts"}
+      ],
+      "rdfs:label": "Construction of cultural survey simulation datasets from World Values Survey (2017-2022) and Pew Global Attitudes Survey with country/question splits and English/Chinese versions"
+    },
+
+    {
+      "@id": "_:FirstToken_Alignment_FineTuning",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:Vicuna15_7B_FT"},
+        {"@id": "_:Vicuna15_13B_FT"},
+        {"@id": "_:Llama3_8B_Base_FT"},
+        {"@id": "_:Llama3_8B_Instruct_FT"},
+        {"@id": "_:DistilQwen_7B_FT"},
+        {"@id": "_:DistilQwen_14B_FT"},
+        {"@id": "_:DistilQwen_32B_FT"}
+      ],
+      "prov:used": [
+        {"@id": "_:WVS_Train_Val_Test_EN"},
+        {"@id": "_:WVS_Train_Val_Test_ZH"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:LoRA_Implementation"},
+        {"@id": "_:KL_Loss_Training"}
+      ],
+      "rdfs:label": "First-token probability alignment fine-tuning (LoRA + KL-divergence loss) of seven LLM variants on WVS response distribution simulation task"
+    },
+
+    {
+      "@id": "_:WVS_2017_2022_Raw",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "World Values Survey Wave 7 (2017-2022) raw data – 66 countries, >80,000 respondents, 259 questions (English + official Chinese versions)"
+    },
+
+    {
+      "@id": "_:Pew_Global_Attitudes_Raw",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Pew Global Attitudes Survey subset from GlobalOpinionQA (used for unseen-survey generalization test)"
+    },
+
+    {
+      "@id": "_:WVS_Train_Val_Test_EN",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:WVS_Simulation_Dataset_Construction",
+      "prov:wasDerivedFrom": "_:WVS_2017_2022_Raw",
+      "rdfs:label": "Processed English WVS simulation dataset (65 countries, first 259 questions) with C1/C2/C3 country and Q1/Q2/Q3 question splits, train/val/test partitions"
+    },
+
+    {
+      "@id": "_:WVS_Train_Val_Test_ZH",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:WVS_Simulation_Dataset_Construction",
+      "prov:wasDerivedFrom": "_:WVS_2017_2022_Raw",
+      "rdfs:label": "Processed Chinese WVS simulation dataset (GLM-4 translated where missing)"
+    },
+
+    {
+      "@id": "_:Pew_Test_Subset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:WVS_Simulation_Dataset_Construction",
+      "prov:wasDerivedFrom": "_:Pew_Global_Attitudes_Raw",
+      "rdfs:label": "Pew Global Attitudes Survey test subset (C′1 sampled countries + C3 medium-GDP countries) for unseen-survey evaluation"
+    },
+
+    {
+      "@id": "_:Vicuna15_7B_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned Vicuna-1.5-7B model weights (LoRA + KL loss on WVS distribution simulation)"
+    },
+
+    {
+      "@id": "_:Vicuna15_13B_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned Vicuna-1.5-13B model weights"
+    },
+
+    {
+      "@id": "_:Llama3_8B_Base_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned Llama-3-8B-Base model weights"
+    },
+
+    {
+      "@id": "_:Llama3_8B_Instruct_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned Llama-3-8B-Instruct model weights"
+    },
+
+    {
+      "@id": "_:DistilQwen_7B_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned DeepSeek-Distilled-Qwen-7B model weights"
+    },
+
+    {
+      "@id": "_:DistilQwen_14B_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned DeepSeek-Distilled-Qwen-14B model weights"
+    },
+
+    {
+      "@id": "_:DistilQwen_32B_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned DeepSeek-Distilled-Qwen-32B model weights"
+    },
+
+    {
+      "@id": "_:GLM4_Translator",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "GLM-4 model used for translating missing Chinese WVS questions"
+    },
+
+    {
+      "@id": "_:Custom_Formatting_Scripts",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Custom preprocessing scripts for WVS/Pew data cleaning, filtering invalid responses, country/question splitting, GlobalOpinionQA-style prompt formatting"
+    },
+
+    {
+      "@id": "_:LoRA_Implementation",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Low-Rank Adaptation (LoRA) implementation for parameter-efficient fine-tuning"
+    },
+
+    {
+      "@id": "_:KL_Loss_Training",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Training setup with Kullback-Leibler divergence loss on first-token option probabilities"
+    }
+  ]
+}
+# --- END FILE: 2502_07068v2.json ---
+
+
+# --- START FILE: 2502_19679v1.json (Path: dcat-prov/2502_19679v1.json) ---
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:LLM_Annotation_Experiment",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:F1000_LLM_Annotations"},
+        {"@id": "_:F1000_R_Score_Dataset"}
+      ],
+      "prov:used": [
+        {"@id": "_:F1000_Expert_Dataset"},
+        {"@id": "_:MAG_Citation_Dataset"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:LLaMA3_1_8B"},
+        {"@id": "_:LLaMA3_1_70B"},
+        {"@id": "_:LLaMA3_1_405B"},
+        {"@id": "_:TogetherAI_API"}
+      ],
+      "rdfs:label": "Experiment applying survey-inspired interventions and independent probability assessment to evaluate reliability of LLaMA-3.1 models annotating biomedical paper contribution types (F1000 dataset)"
+    },
+
+    {
+      "@id": "_:F1000_Expert_Dataset",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "F1000 (Faculty Opinions) expert-annotated biomedical papers (n=816 after cleaning) with contribution type labels: Interesting Hypothesis, Technical Advance, New Finding",
+      "dcat:keyword": ["biomedical literature", "expert annotation", "contribution type"]
+    },
+
+    {
+      "@id": "_:MAG_Citation_Dataset",
+      "@type": "d  cat:Dataset",
+      "rdfs:label": "Microsoft Academic Graph (MAG) citation counts merged with F1000 papers via PMID-to-MAG ID matching (3-year forward citations, log-transformed)"
+    },
+
+    {
+      "@id": "_:F1000_LLM_Annotations",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:LLM_Annotation_Experiment",
+      "prov:wasDerivedFrom": "_:F1000_Expert_Dataset",
+      "rdfs:label": "LLM-generated contribution type annotations on 816 F1000 papers under multiple prompting conditions (original, option randomization, position randomization, reverse validation)"
+    },
+
+    {
+      "@id": "_:F1000_R_Score_Dataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:LLM_Annotation_Experiment",
+      "prov:wasDerivedFrom": "_:F1000_Expert_Dataset",
+      "rdfs:label": "Per-paper R-scores (KL-divergence from uniform) computed via independent binary queries to LLaMA-3.1 models on the F1000 dataset"
+    },
+
+    {
+      "@id": "_:LLaMA3_1_8B",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "LLaMA-3.1-Instruct 8B parameter model (Meta AI)"
+    },
+
+    {
+      "@id": "_:LLaMA3_1_70B",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "LLaMA-3.1-Instruct 70B parameter model (Meta AI)"
+    },
+
+    {
+      "@id": "_:LLaMA3_1_405B",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "LLaMA-3.1-Instruct 405B parameter model (Meta AI)"
+    },
+
+    {
+      "@id": "_:TogetherAI_API",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "TogetherAI inference API used for controlled generation (temperature=0, top-p=0.7) and extraction of logprobs"
+    }
+  ]
+}
+# --- END FILE: 2502_19679v1.json ---
+
+
+# --- START FILE: 2508_13123v1.json (Path: dcat-prov/2508_13123v1.json) ---
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:InverseProblem_Activity",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:Reconstructed_E_Functions_P1"},
+        {"@id": "_:Reconstructed_E_Functions_P2"},
+        {"@id": "_:Reconstructed_E_Functions_P3"},
+        {"@id": "_:Reconstructed_E_Functions_P4"}
+      ],
+      "prov:used": [
+        {"@id": "_:HIV_Clinical_Data_P1"},
+        {"@id": "_:HIV_Clinical_Data_P2"},
+        {"@id": "_:HIV_Clinical_Data_P3"},
+        {"@id": "_:HIV_Clinical_Data_P4"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:Matlab_FEM_Software"},
+        {"@id": "_:Newton_CGA_ACGA_Software"}
+      ],
+      "rdfs:label": "Parameter identification inverse problem: reconstruction of time-dependent immune response coefficient E(t) for four HIV patients using Tikhonov regularization and adaptive conjugate gradient method"
+    },
+
+    {
+      "@id": "_:HIV_Clinical_Data_P1",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Interpolated clinical measurements (total T-cells g1(t), viral load g2(t)) for HIV Patient 1 over [0,363] days (8 original points, linearly interpolated)"
+    },
+    {
+      "@id": "_:HIV_Clinical_Data_P2",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Interpolated clinical measurements (total T-cells g1(t), viral load g2(t)) for HIV Patient 2 over [0,363] days"
+    },
+    {
+      "@id": "_:HIV_Clinical_Data_P3",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Interpolated clinical measurements (total T-cells g1(t), viral load g2(t)) for HIV Patient 3 over [0,363] days"
+    },
+    {
+      "@id": "_:HIV_Clinical_Data_P4",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Interpolated clinical measurements (total T-cells g1(t), viral load g2(t)) for HIV Patient 4 over [0,363] days"
+    },
+
+    {
+      "@id": "_:Reconstructed_E_Functions_P1",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:InverseProblem_Activity",
+      "prov:wasDerivedFrom": "_:HIV_Clinical_Data_P1",
+      "rdfs:label": "Reconstructed time-dependent immune response coefficient E(t) for Patient 1 on adaptively refined time meshes (final J4_τ)"
+    },
+    {
+      "@id": "_:Reconstructed_E_Functions_P2",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:InverseProblem_Activity",
+      "prov:wasDerivedFrom": "_:HIV_Clinical_Data_P2",
+      "rdfs:label": "Reconstructed E(t) for Patient 2 (final J1_τ)"
+    },
+    {
+      "@id": "_:Reconstructed_E_Functions_P3",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:InverseProblem_Activity",
+      "prov:wasDerivedFrom": "_:HIV_Clinical_Data_P3",
+      "rdfs:label": "Reconstructed E(t) for Patient 3 (final J2_τ)"
+    },
+    {
+      "@id": "_:Reconstructed_E_Functions_P4",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:InverseProblem_Activity",
+      "prov:wasDerivedFrom": "_:HIV_Clinical_Data_P4",
+      "rdfs:label": "Reconstructed E(t) for Patient 4 (final J2_τ)"
+    },
+
+    {
+      "@id": "_:Matlab_FEM_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Matlab R2023b finite element implementation (piecewise constant P0 elements) for forward/adjoint HIV dynamics ODE system"
+    },
+
+    {
+      "@id": "_:Newton_CGA_ACGA_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Custom Newton-based solver + Conjugate Gradient Algorithm (CGA) and Adaptive Conjugate Gradient Algorithm (ACGA) with a posteriori error estimators and local time-mesh refinement"
+    }
+  ]
+}
+# --- END FILE: 2508_13123v1.json ---

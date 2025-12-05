@@ -1,0 +1,84 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "https://arxiv.org/abs/2410.22481",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:SimulatedTrainingDataset"},
+        {"@id": "_:SimulatedTestDataset"},
+        {"@id": "_:AMPATHDatasetSplit"}
+      ],
+      "prov:used": [
+        {"@id": "_:SimulationProcedure"},
+        {"@id": "_:AMPATHEHRDataset"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:BayesianTransitionModelSoftware"},
+        {"@id": "_:BARTSoftware"},
+        {"@id": "_:LogisticRegressionSoftware"}
+      ],
+      "rdfs:label": "Simulation study and real-data analysis described in arXiv:2410.22481v1"
+    },
+    {
+      "@id": "_:SimulationProcedure",
+      "@type": "prov:Activity",
+      "rdfs:label": "Monte-Carlo simulation of HIV retention data (300 replications, n=500 train + 500 uncensored test per replication)",
+      "prov:generated": [
+        {"@id": "_:SimulatedTrainingDataset"},
+        {"@id": "_:SimulatedTestDataset"}
+      ]
+    },
+    {
+      "@id": "_:SimulatedTrainingDataset",
+      "@type": "dcat:Dataset",
+      "dcat:distribution": {
+        "@type": "dcat:Distribution",
+        "rdfs:label": "Synthetic training datasets with controlled censoring (20%/40%) and covariate missingness (none/low/high)"
+      },
+      "prov:wasGeneratedBy": "_:SimulationProcedure"
+    },
+    {
+      "@id": "_:SimulatedTestDataset",
+      "@type": "dcat:Dataset",
+      "dcat:distribution": {
+        "@type": "dcat:Distribution",
+        "rdfs:label": "Synthetic uncensored test datasets (n=500, no censoring, complete Y1(∆))"
+      },
+      "prov:wasGeneratedBy": "_:SimulationProcedure"
+    },
+    {
+      "@id": "_:AMPATHEHRDataset",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "AMPATH electronic health records (first visit, 2014-01-01 to 2023-07-31, n=11,011 adults with HIV from four clinics)",
+      "dcat:keyword": ["HIV retention", "scheduled return time", "censoring", "competing risks", "missing covariates"]
+    },
+    {
+      "@id": "_:AMPATHDatasetSplit",
+      "@type": "dcat:Dataset",
+      "prov:wasDerivedFrom": "_:AMPATHEHRDataset",
+      "rdfs:label": "AMPATH dataset split (n=10,011 training + n=1,000 held-out test subjects, stratified random sampling)"
+    },
+    {
+      "@id": "_:BayesianTransitionModelSoftware",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Custom Bayesian Transition Model (BTM) implementation with cause-specific Weibull hazards and b-splines, stratified by clinic × scheduling × missingness pattern"
+    },
+    {
+      "@id": "_:BARTSoftware",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Bayesian Additive Regression Trees (BART) applied to dichotomized retention outcome with implicit imputation of censored cases"
+    },
+    {
+      "@id": "_:LogisticRegressionSoftware",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Stratified maximum-likelihood logistic regression on dichotomized retention outcome"
+    }
+  ]
+}

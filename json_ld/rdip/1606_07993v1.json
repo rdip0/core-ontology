@@ -1,0 +1,151 @@
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/BioIE-Review-Learning-Methods",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Comprehensive Review of Machine Learning and Deep Learning Methods for Biomedical Information Extraction (BioIE)"
+    },
+
+    {
+      "@id": "rdip:Activity/Literature-Review-and-Synthesis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Systematic narrative review and taxonomic synthesis of >200 publications on learning-based BioIE methods (circa 2010–2017)",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/BioIE-Methods-Taxonomy",
+        "@type": "schema:Dataset",
+        "schema:name": "Taxonomy and narrative synthesis of BioIE learning paradigms (supervised, semi-supervised, unsupervised, hybrid, OpenIE, deep learning)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Feature-Based-Learning-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of feature engineering and feature selection approaches in supervised BioIE (lexical, syntactic, semantic, dependency, discourse, word embeddings)",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Feature-Based-BioIE-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Summary of feature types and feature selection strategies in BioIE"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Kernel-Based-Learning-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of kernel methods (tree kernels, graph kernels, MKL, hybrid kernels) applied to BioIE tasks",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Kernel-Based-BioIE-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Synthesis of kernel-based systems and multiple kernel learning in biomedical NER, PPI, DDI, and event extraction"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Cost-Effective-Annotation-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of annotation efficiency methods: pre-annotation, active learning, crowdsourcing (including CrowdTruth), and semi-automated tools (e.g., RapTAT)",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Annotation-Efficiency-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Overview of cost-reduction strategies for creating biomedical annotated corpora"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Unlabeled-Data-Learning-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of unsupervised, semi-supervised (self-training, transfer learning, manifold regularization), and distant supervision approaches in BioIE",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Unlabeled-Learning-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Synthesis of methods leveraging unlabeled biomedical text (including DeepDive distant supervision applications)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Hybrid-and-Joint-Modeling-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of hybrid (rule + ML ensemble) and joint modeling approaches (MLN, dual decomposition, SEARN, structured perceptron) for BioIE",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Hybrid-Joint-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Summary of pipeline vs. joint inference strategies in biomedical event extraction and relation extraction"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/OpenIE-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of Open Information Extraction paradigms and their emerging application to biomedical text",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/OpenIE-BioIE-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "Comparison of Light vs. Heavy OpenIE extractors and biomedical adaptations (NELL adaptation, relation clustering)"
+      }
+    },
+
+    {
+      "@id": "rdip:Activity/Deep-Learning-BioIE-Review",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Review of deep learning applications in BioIE: word embeddings, CNNs, RNNs/LSTMs/GRUs, denoising autoencoders, transfer learning from vision, and clinical prediction",
+      "prov:used": "rdip:Dataset/BioIE-Literature-Corpus",
+      "rdip:usedSoftware": [
+        {
+          "@id": "rdip:Software/word2vec",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "word2vec / GloVe-style embeddings",
+          "rdip:version": "various"
+        },
+        {
+          "@id": "rdip:Software/Theano-TensorFlow-CNTK",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "Deep learning frameworks (Theano, TensorFlow, CNTK, etc.) – implied but not named",
+          "rdip:version": "various (2014–2017 era)"
+        }
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/Deep-Learning-BioIE-Summary",
+        "@type": "schema:Dataset",
+        "schema:name": "State-of-the-art summary of deep neural architectures applied to biomedical NER, relation/event extraction, clinical prediction, and medical imaging"
+      }
+    },
+
+    {
+      "@id": "rdip:Dataset/BioIE-Literature-Corpus",
+      "@type": "schema:Dataset",
+      "schema:name": "Corpus of >200 cited publications on machine learning for BioIE (primarily 2010–2017)",
+      "schema:description": "Includes references to CRF, SSVM, kernel methods, OpenIE systems, DeepDive, word2vec-era embeddings, early CNN/RNN papers in biomedicine"
+    },
+
+    {
+      "@id": "rdip:Activity/Final-Synthesis",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Integration of all sub-reviews into final review manuscript section",
+      "prov:used": [
+        "rdip:Dataset/Feature-Based-BioIE-Summary",
+        "rdip:Dataset/Kernel-Based-BioIE-Summary",
+        "rdip:Dataset/Annotation-Efficiency-Summary",
+        "rdip:Dataset/Unlabeled-Learning-Summary",
+        "rdip:Dataset/Hybrid-Joint-Summary",
+        "rdip:Dataset/OpenIE-BioIE-Summary",
+        "rdip:Dataset/Deep-Learning-BioIE-Summary"
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/BioIE-Review-Section",
+        "@type": "schema:Dataset",
+        "schema:name": "Final 'Methodology' review section of the paper"
+      }
+    }
+  ]
+}

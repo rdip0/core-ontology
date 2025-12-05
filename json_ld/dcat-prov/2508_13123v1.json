@@ -1,0 +1,93 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:InverseProblem_Activity",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:Reconstructed_E_Functions_P1"},
+        {"@id": "_:Reconstructed_E_Functions_P2"},
+        {"@id": "_:Reconstructed_E_Functions_P3"},
+        {"@id": "_:Reconstructed_E_Functions_P4"}
+      ],
+      "prov:used": [
+        {"@id": "_:HIV_Clinical_Data_P1"},
+        {"@id": "_:HIV_Clinical_Data_P2"},
+        {"@id": "_:HIV_Clinical_Data_P3"},
+        {"@id": "_:HIV_Clinical_Data_P4"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:Matlab_FEM_Software"},
+        {"@id": "_:Newton_CGA_ACGA_Software"}
+      ],
+      "rdfs:label": "Parameter identification inverse problem: reconstruction of time-dependent immune response coefficient E(t) for four HIV patients using Tikhonov regularization and adaptive conjugate gradient method"
+    },
+
+    {
+      "@id": "_:HIV_Clinical_Data_P1",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Interpolated clinical measurements (total T-cells g1(t), viral load g2(t)) for HIV Patient 1 over [0,363] days (8 original points, linearly interpolated)"
+    },
+    {
+      "@id": "_:HIV_Clinical_Data_P2",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Interpolated clinical measurements (total T-cells g1(t), viral load g2(t)) for HIV Patient 2 over [0,363] days"
+    },
+    {
+      "@id": "_:HIV_Clinical_Data_P3",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Interpolated clinical measurements (total T-cells g1(t), viral load g2(t)) for HIV Patient 3 over [0,363] days"
+    },
+    {
+      "@id": "_:HIV_Clinical_Data_P4",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Interpolated clinical measurements (total T-cells g1(t), viral load g2(t)) for HIV Patient 4 over [0,363] days"
+    },
+
+    {
+      "@id": "_:Reconstructed_E_Functions_P1",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:InverseProblem_Activity",
+      "prov:wasDerivedFrom": "_:HIV_Clinical_Data_P1",
+      "rdfs:label": "Reconstructed time-dependent immune response coefficient E(t) for Patient 1 on adaptively refined time meshes (final J4_τ)"
+    },
+    {
+      "@id": "_:Reconstructed_E_Functions_P2",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:InverseProblem_Activity",
+      "prov:wasDerivedFrom": "_:HIV_Clinical_Data_P2",
+      "rdfs:label": "Reconstructed E(t) for Patient 2 (final J1_τ)"
+    },
+    {
+      "@id": "_:Reconstructed_E_Functions_P3",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:InverseProblem_Activity",
+      "prov:wasDerivedFrom": "_:HIV_Clinical_Data_P3",
+      "rdfs:label": "Reconstructed E(t) for Patient 3 (final J2_τ)"
+    },
+    {
+      "@id": "_:Reconstructed_E_Functions_P4",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:InverseProblem_Activity",
+      "prov:wasDerivedFrom": "_:HIV_Clinical_Data_P4",
+      "rdfs:label": "Reconstructed E(t) for Patient 4 (final J2_τ)"
+    },
+
+    {
+      "@id": "_:Matlab_FEM_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Matlab R2023b finite element implementation (piecewise constant P0 elements) for forward/adjoint HIV dynamics ODE system"
+    },
+
+    {
+      "@id": "_:Newton_CGA_ACGA_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Custom Newton-based solver + Conjugate Gradient Algorithm (CGA) and Adaptive Conjugate Gradient Algorithm (ACGA) with a posteriori error estimators and local time-mesh refinement"
+    }
+  ]
+}

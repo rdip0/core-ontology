@@ -1,0 +1,95 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:ALIGN_Pretraining_Activity",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:ALIGN_English_Model"},
+        {"@id": "_:ALIGN_Multilingual_Model"}
+      ],
+      "prov:used": [
+        {"@id": "_:ALIGN_English_Dataset"},
+        {"@id": "_:ALIGN_Multilingual_Dataset"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:EfficientNet_Software"},
+        {"@id": "_:BERT_Software"},
+        {"@id": "_:TPU_Training_Infrastructure"}
+      ],
+      "rdfs:label": "Pre-training of ALIGN dual-encoder vision-language models on 1.8B noisy web image-text pairs (English and multilingual versions)"
+    },
+
+    {
+      "@id": "_:ALIGN_Dataset_Construction_Activity",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:ALIGN_English_Dataset"},
+        {"@id": "_:ALIGN_Multilingual_Dataset"}
+      ],
+      "prov:used": [
+        {"@id": "_:Raw_Web_AltText_Pairs"}
+      ],
+      "rdfs:label": "Construction of large-scale noisy image-text datasets by relaxing Conceptual Captions cleaning pipeline (minimal frequency-based and size/aspect-ratio filtering)"
+    },
+
+    {
+      "@id": "_:Raw_Web_AltText_Pairs",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Raw English (and later multilingual) web-crawled image alt-text pairs before any cleaning"
+    },
+
+    {
+      "@id": "_:ALIGN_English_Dataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:ALIGN_Dataset_Construction_Activity",
+      "prov:wasDerivedFrom": "_:Raw_Web_AltText_Pairs",
+      "rdfs:label": "ALIGN English noisy image-text dataset (1.8 billion image-alt-text pairs after minimal cleaning)"
+    },
+
+    {
+      "@id": "_:ALIGN_Multilingual_Dataset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:ALIGN_Dataset_Construction_Activity",
+      "prov:wasDerivedFrom": "_:Raw_Web_AltText_Pairs",
+      "rdfs:label": "ALIGN multilingual noisy image-text dataset (1.8 billion pairs covering 100+ languages)"
+    },
+
+    {
+      "@id": "_:ALIGN_English_Model",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:ALIGN_Pretraining_Activity",
+      "rdfs:label": "ALIGN English model weights (EfficientNet-L2 image encoder + BERT-Large text encoder trained with contrastive normalized softmax loss)"
+    },
+
+    {
+      "@id": "_:ALIGN_Multilingual_Model",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:ALIGN_Pretraining_Activity",
+      "rdfs:label": "ALIGN multilingual model weights (same architecture, trained on multilingual 1.8B dataset with 250k wordpiece vocabulary)"
+    },
+
+    {
+      "@id": "_:EfficientNet_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "EfficientNet (B1 to L2 variants) used as image encoder (global pooling, no 1x1 conv head)"
+    },
+
+    {
+      "@id": "_:BERT_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "BERT (Mini to Large) used as text encoder with additional linear projection layer"
+    },
+
+    {
+      "@id": "_:TPU_Training_Infrastructure",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Google Cloud TPUv3 (1024 cores) training infrastructure with LAMB optimizer and in-batch negatives"
+    }
+  ]
+}

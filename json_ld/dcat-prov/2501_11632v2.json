@@ -1,0 +1,61 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:BKG_Review_Activity",
+      "@type": "prov:Activity",
+      "prov:used": [
+        {"@id": "_:Biomedical_Knowledge_Graphs"},
+        {"@id": "_:Biomedical_Literature_Corpus"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:KGE_Software"},
+        {"@id": "_:GNN_Software"},
+        {"@id": "_:LLM_Software"},
+        {"@id": "_:RuleBased_Software"}
+      ],
+      "rdfs:label": "Systematic review of inference, prediction, interpretation, and application methods on Biomedical Knowledge Graphs (BKGs)"
+    },
+
+    {
+      "@id": "_:Biomedical_Knowledge_Graphs",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Collection of Biomedical Knowledge Graphs used/reviewed (Hetionet, PrimeKG, PharmKG, GenomicKB, SDKG-11, KGHC, PubMedKG, DRAGON, TxGNN, etc.)"
+    },
+
+    {
+      "@id": "_:Biomedical_Literature_Corpus",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Biomedical literature corpus (PubMed abstracts, full-text articles, clinical notes, EMRs) used as source data for BKG construction and evaluation"
+    },
+
+    {
+      "@id": "_:KGE_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Knowledge Graph Embedding models (TransE, TransH, TransR, RESCAL, DistMult, ComplEx, etc.) used for link prediction and embedding-based inference on BKGs"
+    },
+
+    {
+      "@id": "_:GNN_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Graph Neural Network models (GCN, TxGNN, etc.) applied to BKGs for node/relation prediction and multi-hop reasoning"
+    },
+
+    {
+      "@id": "_:LLM_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Large Language Models (GPT-series, LLaMA, etc.) integrated with BKGs for assisted interpretation, graph-to-text generation, RAG, and query understanding"
+    },
+
+    {
+      "@id": "_:RuleBased_Software",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Rule-based and path-based reasoning systems (AMIE, PoLo, XG4Repo, random walks, meta-path methods) used for logical inference and explanation on BKGs"
+    }
+  ]
+}

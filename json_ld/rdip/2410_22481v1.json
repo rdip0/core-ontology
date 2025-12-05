@@ -1,0 +1,112 @@
+{
+  "@context": {
+    "rdip": "https://w3id.org/rdip/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "rdip:Project/HIV-Retention-Bayesian-Transition-Model",
+      "@type": "rdip:ResearchProject",
+      "rdfs:label": "Development and application of a Bayesian Transition Model for HIV care retention with censored and competing-risk outcomes"
+    },
+    {
+      "@id": "rdip:Dataset/AMPATH-EHR-2014-2023",
+      "@type": "schema:Dataset",
+      "schema:name": "AMPATH electronic health records (first visit, adults with HIV, 2014-01-01 to 2023-07-31)",
+      "schema:size": 11011,
+      "schema:description": "Patient-level data from four clinics (Kitale, Busia, Uasin Gishu District Hospital, KCRH Module A) containing scheduled return time, gender, age, ARV status, clinic, viral load (partially missing), CD4 count (partially missing), observed return times, death indicators, and administrative censoring.",
+      "prov:wasGeneratedBy": "rdip:Activity/DataCollection-AMPATH"
+    },
+    {
+      "@id": "rdip:Activity/DataCollection-AMPATH",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Routine collection of electronic health records in AMPATH HIV care program",
+      "prov:used": "rdip:Dataset/AMPATH-EHR-2014-2023"
+    },
+    {
+      "@id": "rdip:Activity/SimulationStudy",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Monte-Carlo simulation of training (n=500) and test (n=500, no censoring) datasets under varying censoring and covariate-missingness scenarios",
+      "prov:generated": [
+        "rdip:Dataset/SimulatedTrainingSets",
+        "rdip:Dataset/SimulatedTestSets"
+      ],
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/CustomRCode",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "Custom R / Stan code (not explicitly named)",
+        "rdip:version": "unknown"
+      }
+    },
+    {
+      "@id": "rdip:Activity/BayesianTransitionModel-RealData",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Fitting of stratified Bayesian cause-specific hazard transition models (BTM) on AMPATH data",
+      "prov:used": "rdip:Dataset/AMPATH-EHR-2014-2023",
+      "rdip:usedSoftware": [
+        {
+          "@id": "rdip:Software/RStan",
+          "@type": "rdip:SoftwareApplication",
+          "schema:name": "RStan (implied Bayesian implementation)",
+          "rdip:version": "unknown"
+        }
+      ],
+      "rdip:outputDataset": {
+        "@id": "rdip:Dataset/BTM-PosteriorDraws-AMPATH",
+        "@type": "schema:Dataset",
+        "schema:name": "Posterior draws of stratified cause-specific hazard parameters (clinic × scheduled time × missingness pattern strata), with b-splines for viral load and CD4 when observed"
+      }
+    },
+    {
+      "@id": "rdip:Activity/BART-Comparison-RealData",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Fitting of stratified BART models on AMPATH data for comparison",
+      "prov:used": "rdip:Dataset/AMPATH-EHR-2014-2023",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/BART-Rpackage",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "R package BART (Bayesian Additive Regression Trees)",
+        "rdip:version": "unknown (Chipman et al., 2010 implementation)"
+      }
+    },
+    {
+      "@id": "rdip:Activity/LogisticComparison-RealData",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Maximum-likelihood logistic regression of dichotomous retention outcome (stratified by missingness pattern)",
+      "prov:used": "rdip:Dataset/AMPATH-EHR-2014-2023",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/R-glm",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "R glm() or equivalent",
+        "rdip:version": "unknown"
+      }
+    },
+    {
+      "@id": "rdip:Activity/PostProcessing-Predictions",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Post-processing of stored posterior draws to compute retention probabilities Ψ^s_j(h; ∆), optimal scheduling decisions, credible intervals, and ternary plots for test-set subjects",
+      "prov:used": "rdip:Dataset/BTM-PosteriorDraws-AMPATH",
+      "rdip:usedSoftware": {
+        "@id": "rdip:Software/CustomRPostprocessing",
+        "@type": "rdip:SoftwareApplication",
+        "schema:name": "Custom R post-processing scripts",
+        "rdip:version": "unknown"
+      },
+      "rdip:outputDataset": [
+        {
+          "@id": "rdip:Dataset/TestSet-Predictions-BTM",
+          "@type": "schema:Dataset",
+          "schema:name": "Retention probabilities, credible intervals, and posterior PMFs of optimal scheduling time for 1,000 held-out AMPATH patients"
+        }
+      ]
+    },
+    {
+      "@id": "rdip:Activity/PerformanceEvaluation-Simulation",
+      "@type": "rdip:DataProductionActivity",
+      "rdfs:label": "Calculation of average test-set AUC and optimal-scheduling accuracy across 300 simulated datasets for BTM, BART, and Logistic models",
+      "prov:generated": "rdip:Dataset/Table1-Results"
+    }
+  ]
+}

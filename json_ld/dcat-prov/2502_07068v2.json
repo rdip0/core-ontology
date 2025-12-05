@@ -1,0 +1,160 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:WVS_Simulation_Dataset_Construction",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:WVS_Train_Val_Test_EN"},
+        {"@id": "_:WVS_Train_Val_Test_ZH"},
+        {"@id": "_:Pew_Test_Subset"}
+      ],
+      "prov:used": [
+        {"@id": "_:WVS_2017_2022_Raw"},
+        {"@id": "_:Pew_Global_Attitudes_Raw"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:GLM4_Translator"},
+        {"@id": "_:Custom_Formatting_Scripts"}
+      ],
+      "rdfs:label": "Construction of cultural survey simulation datasets from World Values Survey (2017-2022) and Pew Global Attitudes Survey with country/question splits and English/Chinese versions"
+    },
+
+    {
+      "@id": "_:FirstToken_Alignment_FineTuning",
+      "@type": "prov:Activity",
+      "prov:generated": [
+        {"@id": "_:Vicuna15_7B_FT"},
+        {"@id": "_:Vicuna15_13B_FT"},
+        {"@id": "_:Llama3_8B_Base_FT"},
+        {"@id": "_:Llama3_8B_Instruct_FT"},
+        {"@id": "_:DistilQwen_7B_FT"},
+        {"@id": "_:DistilQwen_14B_FT"},
+        {"@id": "_:DistilQwen_32B_FT"}
+      ],
+      "prov:used": [
+        {"@id": "_:WVS_Train_Val_Test_EN"},
+        {"@id": "_:WVS_Train_Val_Test_ZH"}
+      ],
+      "prov:wasAssociatedWith": [
+        {"@id": "_:LoRA_Implementation"},
+        {"@id": "_:KL_Loss_Training"}
+      ],
+      "rdfs:label": "First-token probability alignment fine-tuning (LoRA + KL-divergence loss) of seven LLM variants on WVS response distribution simulation task"
+    },
+
+    {
+      "@id": "_:WVS_2017_2022_Raw",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "World Values Survey Wave 7 (2017-2022) raw data – 66 countries, >80,000 respondents, 259 questions (English + official Chinese versions)"
+    },
+
+    {
+      "@id": "_:Pew_Global_Attitudes_Raw",
+      "@type": "dcat:Dataset",
+      "rdfs:label": "Pew Global Attitudes Survey subset from GlobalOpinionQA (used for unseen-survey generalization test)"
+    },
+
+    {
+      "@id": "_:WVS_Train_Val_Test_EN",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:WVS_Simulation_Dataset_Construction",
+      "prov:wasDerivedFrom": "_:WVS_2017_2022_Raw",
+      "rdfs:label": "Processed English WVS simulation dataset (65 countries, first 259 questions) with C1/C2/C3 country and Q1/Q2/Q3 question splits, train/val/test partitions"
+    },
+
+    {
+      "@id": "_:WVS_Train_Val_Test_ZH",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:WVS_Simulation_Dataset_Construction",
+      "prov:wasDerivedFrom": "_:WVS_2017_2022_Raw",
+      "rdfs:label": "Processed Chinese WVS simulation dataset (GLM-4 translated where missing)"
+    },
+
+    {
+      "@id": "_:Pew_Test_Subset",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:WVS_Simulation_Dataset_Construction",
+      "prov:wasDerivedFrom": "_:Pew_Global_Attitudes_Raw",
+      "rdfs:label": "Pew Global Attitudes Survey test subset (C′1 sampled countries + C3 medium-GDP countries) for unseen-survey evaluation"
+    },
+
+    {
+      "@id": "_:Vicuna15_7B_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned Vicuna-1.5-7B model weights (LoRA + KL loss on WVS distribution simulation)"
+    },
+
+    {
+      "@id": "_:Vicuna15_13B_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned Vicuna-1.5-13B model weights"
+    },
+
+    {
+      "@id": "_:Llama3_8B_Base_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned Llama-3-8B-Base model weights"
+    },
+
+    {
+      "@id": "_:Llama3_8B_Instruct_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned Llama-3-8B-Instruct model weights"
+    },
+
+    {
+      "@id": "_:DistilQwen_7B_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned DeepSeek-Distilled-Qwen-7B model weights"
+    },
+
+    {
+      "@id": "_:DistilQwen_14B_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned DeepSeek-Distilled-Qwen-14B model weights"
+    },
+
+    {
+      "@id": "_:DistilQwen_32B_FT",
+      "@type": "dcat:Dataset",
+      "prov:wasGeneratedBy": "_:FirstToken_Alignment_FineTuning",
+      "rdfs:label": "Fine-tuned DeepSeek-Distilled-Qwen-32B model weights"
+    },
+
+    {
+      "@id": "_:GLM4_Translator",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "GLM-4 model used for translating missing Chinese WVS questions"
+    },
+
+    {
+      "@id": "_:Custom_Formatting_Scripts",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Custom preprocessing scripts for WVS/Pew data cleaning, filtering invalid responses, country/question splitting, GlobalOpinionQA-style prompt formatting"
+    },
+
+    {
+      "@id": "_:LoRA_Implementation",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Low-Rank Adaptation (LoRA) implementation for parameter-efficient fine-tuning"
+    },
+
+    {
+      "@id": "_:KL_Loss_Training",
+      "@type": "prov:SoftwareAgent",
+      "rdfs:label": "Training setup with Kullback-Leibler divergence loss on first-token option probabilities"
+    }
+  ]
+}
